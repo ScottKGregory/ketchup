@@ -27,7 +27,7 @@ export default function Navbar(props: Props) {
         <div className="order-1 flex w-full items-center justify-between md:w-auto">
           <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 rtl:space-x-reverse">
             {props.links.map((link) => (
-              <li>
+              <li key={link.title + link.to}>
                 <a
                   href={link.to}
                   className={classNames({

@@ -13,15 +13,13 @@ import {
 
 interface toastHook {
   addToast: (level: ToastLevel, content: string) => void;
-  removeToast: (id: number) => void;
+  removeToast: (id: string) => void;
 }
 
 const ToastContext = React.createContext<toastHook>({
   addToast: () => {},
   removeToast: () => {},
 });
-
-let id = 1;
 
 const ToastProvider = ({ children }: PropsWithChildren) => {
   const [toasts, setToasts] = useState<ToastData[]>([]);
@@ -30,24 +28,27 @@ const ToastProvider = ({ children }: PropsWithChildren) => {
     if (toasts.length > 0) {
       const timer = setTimeout(
         () => setToasts((toasts) => toasts.slice(1)),
-        5000,
+        5000
       );
       return () => clearTimeout(timer);
     }
   }, [toasts]);
 
   const removeToast = useCallback(
-    (id: number) => {
+    (id: string) => {
       setToasts((toasts) => toasts.filter((t) => t.id !== id));
     },
-    [setToasts],
+    [setToasts]
   );
 
   const addToast = useCallback(
     (level: ToastLevel, content: string) => {
-      setToasts((toasts) => [...toasts, { id: id++, level, content }]);
+      setToasts((toasts) => [
+        ...toasts,
+        { id: crypto.randomUUID(), level, content },
+      ]);
     },
-    [setToasts],
+    [setToasts]
   );
 
   return (

@@ -22,6 +22,10 @@ export default function App() {
   );
 }
 
+function randInArray<T extends any>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 function Content() {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(10);
@@ -72,7 +76,10 @@ function Content() {
                 { heading: "Origin", key: "origin" },
               ]}
               onRowClick={(val: Produce) => {
-                addToast("info", val.name);
+                addToast(
+                  randInArray(["info", "success", "warning", "error"]),
+                  val.name
+                );
               }}
             />
           </Paginator>

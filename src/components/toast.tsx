@@ -1,11 +1,12 @@
-import { animated, useTransition } from "@react-spring/web";
+import { animated, config, useTransition } from "@react-spring/web";
 import { useToast } from "../hooks/toast";
 import { createPortal } from "react-dom";
+import { useMemo } from "react";
 
 export type ToastLevel = "info" | "success" | "warning" | "error";
 
 export interface ToastData {
-  id: number;
+  id: string;
   content: string;
   level: ToastLevel;
 }
@@ -26,7 +27,7 @@ export default function Toast(props: Props) {
         fill="currentColor"
         viewBox="0 0 20 20"
       >
-        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4" />
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10" />
       </svg>
       <span className="sr-only">{props.level} icon</span>
     </div>
@@ -105,9 +106,9 @@ export default function Toast(props: Props) {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
             />
           </svg>
@@ -118,28 +119,49 @@ export default function Toast(props: Props) {
 }
 
 export const ToastContainer = ({ toasts }: { toasts: ToastData[] }) => {
+  const refMap = useMemo(() => new WeakMap(), []);
+  const cancelMap = useMemo(() => new WeakMap(), []);
   const { removeToast } = useToast();
 
   const transitions = useTransition(toasts, {
-    from: { x: -400 },
-    enter: { x: 0 },
-    leave: { x: -400 },
+    config: config.stiff,
+    from: { x: -400, height: 0 },
+    trail: 400 / toasts.length,
+    enter: (item) => async (next, cancel) => {
+      cancelMap.set(item, cancel);
+      await next({
+        x: 0,
+        height: refMap.get(item).offsetHeight,
+      });
+    },
+    leave: (item) => async (next, cancel) => {
+      cancelMap.set(item, cancel);
+      await next({
+        x: -400,
+        height: refMap.get(item).offsetHeight,
+      });
+    },
   });
 
-  console.log(toasts);
   return createPortal(
-    <div className="fixed bottom-0 left-0 top-16 z-10 flex w-96 flex-col-reverse gap-2 p-4">
+    <div className="fixed bottom-0 left-0 z-10 flex w-96 flex-col gap-2 p-4">
       {transitions((style, t) => (
         <animated.div style={style}>
-          <Toast
-            key={t.id}
-            message={t.content}
-            level={t.level}
-            onClose={() => removeToast(t.id)}
-          />
+          <div
+            ref={(ref: HTMLDivElement) => {
+              ref && refMap.set(t, ref);
+            }}
+          >
+            <Toast
+              key={t.id}
+              message={t.content}
+              level={t.level}
+              onClose={() => removeToast(t.id)}
+            />
+          </div>
         </animated.div>
       ))}
     </div>,
-    document.body,
+    document.body
   );
 };
