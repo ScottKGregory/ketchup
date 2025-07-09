@@ -1,6 +1,6 @@
-export const TextAlignment = (
-  align: "left" | "right" | "center" | undefined,
-): string => {
+export type Alignment = "left" | "right" | "center" | "justify" | undefined;
+
+export const TextAlignment = (align: Alignment): string => {
   switch (align) {
     case "left":
       return "text-left";
@@ -8,6 +8,8 @@ export const TextAlignment = (
       return "text-right";
     case "center":
       return "text-center";
+    case "justify":
+      return "text-justify";
     default:
       return "text-left";
   }

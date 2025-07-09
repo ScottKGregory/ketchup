@@ -16,7 +16,7 @@ export default function Navbar(props: Props) {
     <nav className="fixed start-0 top-0 z-20 w-full border-b border-gray-200 bg-white">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
         <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="public/ketchup.png" className="h-8" />
+          <img src="ketchup.png" className="h-8" />
           <span className="self-center whitespace-nowrap text-2xl font-semibold">
             Ketchup
           </span>

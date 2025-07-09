@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import dayjs from "dayjs";
 import type { ReactElement, ReactNode } from "react";
-import { TextAlignment } from "../helpers/classes";
+import { TextAlignment, type Alignment } from "../helpers/classes";
 
 interface Column<T extends object> {
   heading: ReactElement | string;
   key: keyof T;
   render?: (val: T) => ReactElement;
   boolConvert?: (b: boolean) => string;
-  align?: "left" | "right" | "center";
+  align?: Alignment;
 }
 
 interface Props<T extends object> {

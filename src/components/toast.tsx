@@ -149,7 +149,7 @@ export const ToastContainer = ({ toasts }: { toasts: ToastData[] }) => {
         <animated.div style={style}>
           <div
             ref={(ref: HTMLDivElement) => {
-              ref && refMap.set(t, ref);
+              refMap.set(t, ref);
             }}
           >
             <Toast
@@ -162,6 +162,6 @@ export const ToastContainer = ({ toasts }: { toasts: ToastData[] }) => {
         </animated.div>
       ))}
     </div>,
-    document.body
+    document.body,
   );
 };
