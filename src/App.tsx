@@ -105,39 +105,56 @@ function Content() {
             metus, hendrerit eget pharetra nec, commodo non ex. Curabitur nec
             dolor sed turpis condimentum dapibus ac vehicula nisl. Nullam nec
             venenatis ex. Proin pulvinar diam sed augue pellentesque fringilla.
-            <Typography>
-              Duis ut lacinia augue, sed ultricies nunc. Vestibulum ut enim mi.
-              Phasellus ac massa ullamcorper ligula feugiat efficitur. Nulla
-              fermentum sapien nisl. Sed commodo leo quis erat vulputate, sed
-              tempor nunc volutpat. Mauris vitae scelerisque odio. Nunc auctor
-              quam justo, sed dapibus nibh semper id. Aliquam et tellus at
-              sapien tincidunt ultricies vitae nec velit. Aenean fringilla dui
-              ut nulla fringilla, id pellentesque velit interdum. Proin blandit
-              sagittis purus.
+          </Typography>
+          <Typography>
+            Duis ut lacinia augue, sed ultricies nunc. Vestibulum ut enim mi.
+            Phasellus ac massa ullamcorper ligula feugiat efficitur. Nulla
+            fermentum sapien nisl. Sed commodo leo quis erat vulputate, sed
+            tempor nunc volutpat. Mauris vitae scelerisque odio. Nunc auctor
+            quam justo, sed dapibus nibh semper id. Aliquam et tellus at sapien
+            tincidunt ultricies vitae nec velit. Aenean fringilla dui ut nulla
+            fringilla, id pellentesque velit interdum. Proin blandit sagittis
+            purus.
+          </Typography>
+          <Typography>
+            Suspendisse eget ligula vel odio sagittis bibendum. Pellentesque ac
+            quam tempus, iaculis nisl ac, pellentesque magna.{" "}
+            <Typography underlined type="span">
+              Pellentesque tincidunt tincidunt nibh, gravida semper urna
+              imperdiet in.{" "}
             </Typography>
-            <Typography>
-              Suspendisse eget ligula vel odio sagittis bibendum. Pellentesque
-              ac quam tempus, iaculis nisl ac, pellentesque magna.{" "}
-              <Typography underlined type="span">
-                Pellentesque tincidunt tincidunt nibh, gravida semper urna
-                imperdiet in.{" "}
-              </Typography>
-              Pellentesque commodo, metus eu dignissim dapibus, magna sapien
-              interdum nibh, sit amet tincidunt orci massa eu libero.
-              Pellentesque id tellus ut purus efficitur mattis tincidunt non
-              purus. Fusce venenatis dui in rhoncus tempus. Mauris elit magna,
-              ultricies et mi a, aliquet maximus dui.{" "}
-              <Typography type="span" strike>
-                Vivamus bibendum velit sit amet odio dictum, vel varius quam
-                finibus.
-              </Typography>{" "}
-              In auctor, est in tincidunt lacinia, neque turpis congue ipsum,
-              vel semper justo felis eget dui.
-            </Typography>
+            Pellentesque commodo, metus eu dignissim dapibus, magna sapien
+            interdum nibh, sit amet tincidunt orci massa eu libero. Pellentesque
+            id tellus ut purus efficitur mattis tincidunt non purus. Fusce
+            venenatis dui in rhoncus tempus. Mauris elit magna, ultricies et mi
+            a, aliquet maximus dui.{" "}
+            <Typography type="span" strike>
+              Vivamus bibendum velit sit amet odio dictum, vel varius quam
+              finibus.
+            </Typography>{" "}
+            In auctor, est in tincidunt lacinia, neque turpis congue ipsum, vel
+            semper justo felis eget dui.
           </Typography>
           <Typography type="blockquote">
             Well, He broke the mold when He made me. He made me very special. -
             Mrs. Doubtfire
+          </Typography>
+        </Card>
+      </Container>
+      <Container>
+        <Card>
+          <Typography type="code">
+            {`{
+  "name": "John Doe",
+  "age": 30,
+  "city": "New York",
+  "isStudent": false,
+  "address": {
+    "street": "123 Main St",
+    "zipCode": "10001"
+  },
+  "hobbies": ["reading", "hiking"]
+}`}
           </Typography>
         </Card>
       </Container>

@@ -15,7 +15,8 @@ interface Props extends PropsWithChildren {
     | "leading"
     | "drop-cap"
     | "blockquote"
-    | "span";
+    | "span"
+    | "code";
 
   bold?: boolean;
   underlined?: boolean;
@@ -28,6 +29,7 @@ interface Props extends PropsWithChildren {
 
 export default function Typography(props: Props) {
   let classes = classNames(
+    "font-sans",
     {
       "font-semibold": props.bold,
       underline: props.underlined,
@@ -56,44 +58,71 @@ export default function Typography(props: Props) {
     case "subtitle":
       return (
         <p
-          className={classNames(classes, "-mt-2 mb-4 text-lg font-extralight")}
+          className={classNames(
+            classes,
+            "font-heading -mt-2 mb-4 text-lg font-extralight",
+          )}
         >
           {props.children}
         </p>
       );
     case "h1":
       return (
-        <h1 className={classNames(classes, "mb-4 text-5xl font-extrabold")}>
+        <h1
+          className={classNames(
+            classes,
+            "font-heading mb-4 text-5xl font-extrabold",
+          )}
+        >
           {props.children}
         </h1>
       );
     case "h2":
       return (
-        <h2 className={classNames(classes, "mb-4 text-4xl font-bold")}>
+        <h2
+          className={classNames(
+            classes,
+            "font-heading mb-4 text-4xl font-bold",
+          )}
+        >
           {props.children}
         </h2>
       );
     case "h3":
       return (
-        <h3 className={classNames(classes, "mb-4 text-3xl font-bold")}>
+        <h3
+          className={classNames(
+            classes,
+            "font-heading mb-4 text-3xl font-bold",
+          )}
+        >
           {props.children}
         </h3>
       );
     case "h4":
       return (
-        <h4 className={classNames(classes, "mb-4 text-2xl font-bold")}>
+        <h4
+          className={classNames(
+            classes,
+            "font-heading mb-4 text-2xl font-bold",
+          )}
+        >
           {props.children}
         </h4>
       );
     case "h5":
       return (
-        <h5 className={classNames(classes, "mb-4 text-xl font-bold")}>
+        <h5
+          className={classNames(classes, "font-heading mb-4 text-xl font-bold")}
+        >
           {props.children}
         </h5>
       );
     case "h6":
       return (
-        <h6 className={classNames(classes, "mb-4 text-lg font-bold")}>
+        <h6
+          className={classNames(classes, "font-heading mb-4 text-lg font-bold")}
+        >
           {props.children}
         </h6>
       );
@@ -137,6 +166,17 @@ export default function Typography(props: Props) {
             "{props.children}"
           </p>
         </blockquote>
+      );
+    case "code":
+      return (
+        <pre
+          className={classNames(
+            classes,
+            "mb-3 font-mono text-sm text-gray-500",
+          )}
+        >
+          <code>{props.children}</code>
+        </pre>
       );
     case "p":
     default:
