@@ -35,11 +35,24 @@ export default function Paginator(props: Props) {
         disabled={!props.onPrev || props.start === 0}
       />
 
-      <Typography type="span">
+      <Typography type="span" className="text-sm">
         {" "}
-        Showing <Typography type="span"> {props.start} </Typography> to{" "}
-        <Typography type="span"> {end} </Typography> of{" "}
-        <Typography type="span"> {props.count} </Typography> {props.label}{" "}
+        Showing{" "}
+        <Typography type="span" bold>
+          {" "}
+          {props.start}{" "}
+        </Typography>{" "}
+        to{" "}
+        <Typography type="span" bold>
+          {" "}
+          {end}{" "}
+        </Typography>{" "}
+        of{" "}
+        <Typography type="span" bold>
+          {" "}
+          {props.count}{" "}
+        </Typography>{" "}
+        {props.label}{" "}
       </Typography>
 
       <Button
