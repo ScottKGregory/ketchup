@@ -54,7 +54,7 @@ function Content() {
       />
 
       <Container>
-        <Card>
+        <Card padding="lg">
           <Paginator
             top={false}
             label="Foods"

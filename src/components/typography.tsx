@@ -28,6 +28,7 @@ interface Props extends PropsWithChildren {
 }
 
 export default function Typography(props: Props) {
+  const textColour = "text-gray-700";
   let classes = classNames(
     "font-sans",
     "last:mb-0",
@@ -61,7 +62,7 @@ export default function Typography(props: Props) {
         <p
           className={classNames(
             classes,
-            "-mt-2 mb-4 font-heading text-lg font-extralight",
+            "-mt-2 mb-4 font-heading text-lg font-light",
           )}
         >
           {props.children}
@@ -130,10 +131,7 @@ export default function Typography(props: Props) {
     case "leading":
       return (
         <p
-          className={classNames(
-            classes,
-            "mb-3 text-lg text-gray-500 md:text-xl",
-          )}
+          className={classNames(classes, "mb-3 text-lg md:text-xl", textColour)}
         >
           {props.children}
         </p>
@@ -143,7 +141,8 @@ export default function Typography(props: Props) {
         <p
           className={classNames(
             classes,
-            "mb-3 text-gray-500",
+            "mb-3",
+            textColour,
             "first-letter:float-start first-letter:me-3 first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900",
           )}
         >
@@ -171,10 +170,7 @@ export default function Typography(props: Props) {
     case "code":
       return (
         <pre
-          className={classNames(
-            classes,
-            "mb-3 font-mono text-sm text-gray-500",
-          )}
+          className={classNames(classes, "mb-3 font-mono text-sm", textColour)}
         >
           <code>{props.children}</code>
         </pre>
@@ -182,7 +178,7 @@ export default function Typography(props: Props) {
     case "p":
     default:
       return (
-        <p className={classNames(classes, "mb-3 text-gray-500")}>
+        <p className={classNames(classes, "mb-3", textColour)}>
           {props.children}
         </p>
       );
