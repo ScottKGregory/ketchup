@@ -25,10 +25,12 @@ interface Props extends PropsWithChildren {
   strike?: boolean;
   uppercase?: boolean;
   columns?: 1 | 2 | 3 | 4;
+
+  className?: string;
 }
 
 export default function Typography(props: Props) {
-  const textColour = "text-gray-700";
+  const textColour = "text-gray-700 dark:text-gray-300";
   let classes = classNames(
     "font-sans",
     "last:mb-0",
@@ -40,6 +42,8 @@ export default function Typography(props: Props) {
       uppercase: props.uppercase,
     },
     TextAlignment(props.align),
+    textColour,
+    props.className,
   );
 
   switch (props.columns) {
@@ -143,7 +147,7 @@ export default function Typography(props: Props) {
             classes,
             "mb-3",
             textColour,
-            "first-letter:float-start first-letter:me-3 first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900",
+            "first-letter:float-start first-letter:me-3 first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100",
           )}
         >
           {props.children}
@@ -154,7 +158,7 @@ export default function Typography(props: Props) {
         <blockquote
           className={classNames(
             classes,
-            "my-8 border-s-4 border-gray-300 bg-gray-50 p-4",
+            "my-8 border-s-4 border-gray-300 bg-gray-50 p-4 dark:bg-gray-800",
           )}
         >
           <p

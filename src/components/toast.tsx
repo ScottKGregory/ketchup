@@ -2,6 +2,7 @@ import { animated, config, useTransition } from "@react-spring/web";
 import { useToast } from "../hooks/toast";
 import { createPortal } from "react-dom";
 import { useMemo } from "react";
+import Typography from "./typography";
 
 export type ToastLevel = "info" | "success" | "warning" | "error";
 
@@ -84,11 +85,13 @@ export default function Toast(props: Props) {
   }
   return (
     <div
-      className="flex w-full max-w-xs items-center rounded-lg bg-white p-4 text-gray-500 shadow-md"
+      className="flex w-full max-w-xs items-center rounded-lg bg-white p-4 shadow-md dark:bg-gray-800"
       role="alert"
     >
       {icon}
-      <div className="ms-3 text-sm font-normal">{props.message}</div>
+      <Typography type="span" className="ms-3 text-sm">
+        {props.message}
+      </Typography>
       {props.onClose && (
         <button
           type="button"

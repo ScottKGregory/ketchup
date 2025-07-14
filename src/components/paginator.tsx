@@ -1,6 +1,7 @@
 import type { PropsWithChildren } from "react";
 import Button from "./button";
 import classNames from "classnames";
+import Typography from "./typography";
 
 interface Props extends PropsWithChildren {
   top?: boolean;
@@ -34,16 +35,12 @@ export default function Paginator(props: Props) {
         disabled={!props.onPrev || props.start === 0}
       />
 
-      <span className="text-sm text-gray-700">
+      <Typography type="span">
         {" "}
-        Showing{" "}
-        <span className="font-semibold text-gray-900">
-          {" "}
-          {props.start}{" "}
-        </span> to <span className="font-semibold text-gray-900"> {end} </span>{" "}
-        of <span className="font-semibold text-gray-900"> {props.count} </span>{" "}
-        {props.label}{" "}
-      </span>
+        Showing <Typography type="span"> {props.start} </Typography> to{" "}
+        <Typography type="span"> {end} </Typography> of{" "}
+        <Typography type="span"> {props.count} </Typography> {props.label}{" "}
+      </Typography>
 
       <Button
         text="Next"

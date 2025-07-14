@@ -2,6 +2,7 @@ import classNames from "classnames";
 import dayjs from "dayjs";
 import type { ReactElement, ReactNode } from "react";
 import { TextAlignment, type Alignment } from "../helpers/classes";
+import Typography from "./typography";
 
 interface Column<T extends object> {
   heading: ReactElement | string;
@@ -22,7 +23,7 @@ interface Props<T extends object> {
   onRowClick?: (val: T) => void;
 }
 
-const cellClasses = classNames("px-4 py-2 border-b");
+const cellClasses = classNames("px-4 py-2 border-b dark:border-gray-700");
 
 export default function Table<T extends object>(props: Props<T>) {
   const boolToString = (b: boolean): string => {
@@ -66,10 +67,12 @@ export default function Table<T extends object>(props: Props<T>) {
     const classes = classNames(TextAlignment(col.align), cellClasses);
     return props.leftHeading ? (
       <th scope="row" className={classes}>
-        {ret as ReactNode}
+        <Typography type="span">{ret as ReactNode}</Typography>
       </th>
     ) : (
-      <td className={classes}>{ret as ReactNode}</td>
+      <td className={classes}>
+        <Typography type="span">{ret as ReactNode}</Typography>
+      </td>
     );
   };
 
@@ -83,7 +86,7 @@ export default function Table<T extends object>(props: Props<T>) {
               scope="col"
               className={classNames(TextAlignment(col.align), cellClasses)}
             >
-              {col.heading}
+              <Typography type="span">{col.heading}</Typography>
             </th>
           ))}
         </tr>
@@ -91,7 +94,7 @@ export default function Table<T extends object>(props: Props<T>) {
       <tbody>
         {props.data.map((val) => (
           <tr
-            className={classNames("hover:bg-gray-100", {
+            className={classNames("hover:bg-gray-100 hover:dark:bg-gray-800", {
               "hover:cursor-pointer": !!props.onRowClick,
             })}
             onClick={
