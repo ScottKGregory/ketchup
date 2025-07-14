@@ -88,7 +88,7 @@ function Content() {
       </Container>
 
       <Container>
-        <Card>
+        <Card padding="xl">
           <Typography type="h2">Ketchup!</Typography>
           <Typography type="subtitle">It's a wonderful sauce</Typography>
           <Typography type="drop-cap" columns={2}>
@@ -142,7 +142,7 @@ function Content() {
         </Card>
       </Container>
       <Container>
-        <Card>
+        <Card padding="xl">
           <Typography type="code">
             {`{
   "name": "John Doe",

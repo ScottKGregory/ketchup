@@ -30,6 +30,7 @@ interface Props extends PropsWithChildren {
 export default function Typography(props: Props) {
   let classes = classNames(
     "font-sans",
+    "last:mb-0",
     {
       "font-semibold": props.bold,
       underline: props.underlined,
@@ -60,7 +61,7 @@ export default function Typography(props: Props) {
         <p
           className={classNames(
             classes,
-            "font-heading -mt-2 mb-4 text-lg font-extralight",
+            "-mt-2 mb-4 font-heading text-lg font-extralight",
           )}
         >
           {props.children}
@@ -71,7 +72,7 @@ export default function Typography(props: Props) {
         <h1
           className={classNames(
             classes,
-            "font-heading mb-4 text-5xl font-extrabold",
+            "mb-4 font-heading text-5xl font-extrabold",
           )}
         >
           {props.children}
@@ -82,7 +83,7 @@ export default function Typography(props: Props) {
         <h2
           className={classNames(
             classes,
-            "font-heading mb-4 text-4xl font-bold",
+            "mb-4 font-heading text-4xl font-bold",
           )}
         >
           {props.children}
@@ -93,7 +94,7 @@ export default function Typography(props: Props) {
         <h3
           className={classNames(
             classes,
-            "font-heading mb-4 text-3xl font-bold",
+            "mb-4 font-heading text-3xl font-bold",
           )}
         >
           {props.children}
@@ -104,7 +105,7 @@ export default function Typography(props: Props) {
         <h4
           className={classNames(
             classes,
-            "font-heading mb-4 text-2xl font-bold",
+            "mb-4 font-heading text-2xl font-bold",
           )}
         >
           {props.children}
@@ -113,7 +114,7 @@ export default function Typography(props: Props) {
     case "h5":
       return (
         <h5
-          className={classNames(classes, "font-heading mb-4 text-xl font-bold")}
+          className={classNames(classes, "mb-4 font-heading text-xl font-bold")}
         >
           {props.children}
         </h5>
@@ -121,7 +122,7 @@ export default function Typography(props: Props) {
     case "h6":
       return (
         <h6
-          className={classNames(classes, "font-heading mb-4 text-lg font-bold")}
+          className={classNames(classes, "mb-4 font-heading text-lg font-bold")}
         >
           {props.children}
         </h6>
@@ -154,7 +155,7 @@ export default function Typography(props: Props) {
         <blockquote
           className={classNames(
             classes,
-            "my-4 border-s-4 border-gray-300 bg-gray-50 p-4",
+            "my-8 border-s-4 border-gray-300 bg-gray-50 p-4",
           )}
         >
           <p
