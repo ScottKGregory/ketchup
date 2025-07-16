@@ -38,9 +38,9 @@ export default function Navbar(props: Props) {
                   <a
                     href={link.to}
                     className={classNames({
-                      "dar block rounded-sm bg-red-700 bg-transparent p-0 text-red-700":
+                      "bg-primary-700 text-primary-700 block rounded-sm bg-transparent p-0":
                         link.active,
-                      "block rounded-sm p-0 text-gray-900 hover:bg-gray-100 hover:bg-transparent hover:text-red-700 dark:text-gray-100":
+                      "hover:text-primary-700 block rounded-sm p-0 text-gray-900 hover:bg-gray-100 hover:bg-transparent dark:text-gray-100":
                         !link.active,
                     })}
                   >

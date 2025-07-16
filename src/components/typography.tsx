@@ -1,6 +1,11 @@
 import classNames from "classnames";
 import type { PropsWithChildren } from "react";
-import { TextAlignment, type Alignment } from "../helpers/classes";
+import {
+  TextAlignment,
+  TextSize,
+  type Alignment,
+  type Size,
+} from "../helpers/classes";
 
 interface Props extends PropsWithChildren {
   type?:
@@ -16,7 +21,8 @@ interface Props extends PropsWithChildren {
     | "drop-cap"
     | "blockquote"
     | "span"
-    | "code";
+    | "code"
+    | "label";
 
   bold?: boolean;
   underlined?: boolean;
@@ -25,6 +31,7 @@ interface Props extends PropsWithChildren {
   strike?: boolean;
   uppercase?: boolean;
   columns?: 1 | 2 | 3 | 4;
+  size?: Size;
 
   className?: string;
 }
@@ -42,6 +49,7 @@ export default function Typography(props: Props) {
       uppercase: props.uppercase,
     },
     TextAlignment(props.align),
+    TextSize(props.size),
     textColour,
     props.className,
   );
@@ -178,6 +186,12 @@ export default function Typography(props: Props) {
         >
           <code>{props.children}</code>
         </pre>
+      );
+    case "label":
+      return (
+        <label className={classNames(classes, "mb-1 inline-block", textColour)}>
+          {props.children}
+        </label>
       );
     case "p":
     default:

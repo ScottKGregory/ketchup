@@ -33,7 +33,7 @@ export default function Spinner(props: Props) {
         <svg
           aria-hidden="true"
           className={classNames(
-            "inline h-14 w-14 animate-spin fill-red-600 text-gray-200",
+            "fill-primary-600 inline h-14 w-14 animate-spin text-gray-200",
             {
               "h-4 w-4": props.inline,
             },

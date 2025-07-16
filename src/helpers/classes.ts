@@ -34,3 +34,22 @@ export const Padding = (size: Size): string => {
       return "p-4";
   }
 };
+
+export const TextSize = (size: Size): string => {
+  switch (size) {
+    case "2xl":
+      return "text-2xl";
+    case "xl":
+      return "text-xl";
+    case "lg":
+      return "text-lg";
+    case "md":
+      return "text-md";
+    case "sm":
+      return "text-sm";
+    case "xs":
+      return "text-xs";
+    default:
+      return "";
+  }
+};

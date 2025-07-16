@@ -9,6 +9,7 @@ import ToastProvider, { useToast } from "./hooks/toast";
 import Typography from "./components/typography";
 import Spinner from "./components/spinner";
 import Button from "./components/button";
+import Input from "./components/forms/input";
 
 interface Produce {
   id: number;
@@ -55,58 +56,6 @@ function Content() {
           { title: "Contact", to: "" },
         ]}
       />
-
-      <Container>
-        <Button
-          onClick={() => setLoading((l) => !l)}
-          text="Toggle loading"
-          loading={loading}
-        />
-      </Container>
-
-      <Container>
-        <Spinner loading={loading}>
-          <Card padding="lg">
-            <Paginator
-              top={false}
-              label="Foods"
-              count={mockData.foods.length}
-              start={start}
-              end={end}
-              onNext={() => {
-                setLoading(true);
-                setTimeout(() => {
-                  setLoading(false);
-                  changePage(10);
-                }, 1000);
-              }}
-              onPrev={() => {
-                setLoading(true);
-                setTimeout(() => {
-                  setLoading(false);
-                  changePage(-10);
-                }, 1000);
-              }}
-            >
-              <Table<Produce>
-                data={foods}
-                columns={[
-                  { heading: "ID", key: "id" },
-                  { heading: "Name", key: "name" },
-                  { heading: "Cost", key: "cost", align: "right" },
-                  { heading: "Origin", key: "origin" },
-                ]}
-                onRowClick={(val: Produce) => {
-                  addToast(
-                    randInArray(["info", "success", "warning", "error"]),
-                    val.name,
-                  );
-                }}
-              />
-            </Paginator>
-          </Card>
-        </Spinner>
-      </Container>
 
       <Container>
         <Spinner loading={loading}>
@@ -177,6 +126,203 @@ function Content() {
             </Typography>
           </Card>
         </Spinner>
+      </Container>
+
+      <Container>
+        <Button
+          onClick={() => setLoading((l) => !l)}
+          text="Toggle loading"
+          loading={loading}
+        />
+      </Container>
+
+      <Container>
+        <Spinner loading={loading}>
+          <Card padding="lg">
+            <Typography type="h2">Tables</Typography>
+            <Typography type="subtitle">TIme to get tabular!</Typography>
+            <Paginator
+              top={false}
+              label="Foods"
+              count={mockData.foods.length}
+              start={start}
+              end={end}
+              onNext={() => {
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                  changePage(10);
+                }, 1000);
+              }}
+              onPrev={() => {
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                  changePage(-10);
+                }, 1000);
+              }}
+            >
+              <Table<Produce>
+                data={foods}
+                columns={[
+                  { heading: "ID", key: "id" },
+                  { heading: "Name", key: "name" },
+                  { heading: "Cost", key: "cost", align: "right" },
+                  { heading: "Origin", key: "origin" },
+                ]}
+                onRowClick={(val: Produce) => {
+                  addToast(
+                    randInArray(["info", "success", "warning", "error"]),
+                    val.name,
+                  );
+                }}
+              />
+            </Paginator>
+          </Card>
+        </Spinner>
+      </Container>
+
+      <Container>
+        <Card padding="xl">
+          <Typography type="h2">Forms</Typography>
+          <Typography type="subtitle">Data collection anyone?</Typography>
+          <div className="flex gap-16">
+            <div className="flex-1">
+              <Input
+                type="text"
+                state="normal"
+                label="Normal"
+                placeholder="Please enter a normal value"
+                id="normal"
+                help="Ex et tempor dolor eu duis."
+              />
+              <Input
+                type="date"
+                state="success"
+                label="Success"
+                placeholder="Please enter a successful value"
+                id="success"
+                help="Do exercitation dolor consectetur incididunt sit aute."
+              />
+              <Input
+                type="time"
+                state="error"
+                label="Error"
+                placeholder="Please enter a erroneous value"
+                id="error"
+                help="Quis fugiat qui nostrud pariatur commodo do est laboris dolore."
+              />
+
+              <Input
+                type="file"
+                state="normal"
+                label="Normal File"
+                placeholder="Please enter a normal value"
+                id="normal"
+                help="Ex et tempor dolor eu duis."
+              />
+              <Input
+                type="file"
+                state="success"
+                label="Success File"
+                placeholder="Please enter a successful value"
+                id="success"
+                help="Do exercitation dolor consectetur incididunt sit aute."
+              />
+              <Input
+                type="file"
+                state="error"
+                label="Error File"
+                placeholder="Please enter a erroneous value"
+                id="error"
+                help="Quis fugiat qui nostrud pariatur commodo do est laboris dolore."
+              />
+            </div>
+            <div className="flex-1">
+              <Input
+                type="toggle"
+                state="normal"
+                label="Normal Toggle"
+                placeholder="Please enter a normal value"
+                id="normal"
+                help="Commodo proident eu nisi reprehenderit ad."
+              />
+              <Input
+                type="toggle"
+                state="success"
+                label="Success Toggle"
+                placeholder="Please enter a successful value"
+                id="success"
+                help="Do exercitation dolor consectetur incididunt sit aute."
+              />
+              <Input
+                type="toggle"
+                state="error"
+                label="Error Toggle"
+                placeholder="Please enter a erroneous value"
+                id="error"
+                help="Quis fugiat qui nostrud pariatur commodo do est laboris dolore."
+              />
+
+              <Input
+                type="range"
+                state="normal"
+                label="Normal Range"
+                placeholder="Please enter a normal value"
+                id="normal"
+                help="Ex et tempor dolor eu duis."
+              />
+              <Input
+                type="range"
+                state="success"
+                label="Success Range"
+                placeholder="Please enter a successful value"
+                id="success"
+                help="Do exercitation dolor consectetur incididunt sit aute."
+              />
+              <Input
+                type="range"
+                state="error"
+                label="Error Range"
+                placeholder="Please enter a erroneous value"
+                id="error"
+                help="Quis fugiat qui nostrud pariatur commodo do est laboris dolore."
+              />
+            </div>
+            <div className="flex-1">
+              <Input
+                type="checkbox"
+                state="normal"
+                label="Normal Checkbox"
+                placeholder="Please enter a normal value"
+                id="normal"
+                help="Commodo proident eu nisi reprehenderit ad."
+              />
+              <Input
+                type="checkbox"
+                state="success"
+                label="Success Checkbox"
+                placeholder="Please enter a successful value"
+                id="success"
+                help="Do exercitation dolor consectetur incididunt sit aute."
+              />
+              <Input
+                type="checkbox"
+                state="error"
+                label="Error Checkbox"
+                placeholder="Please enter a erroneous value"
+                id="error"
+                help="Quis fugiat qui nostrud pariatur commodo do est laboris dolore."
+              />
+            </div>
+          </div>
+          <div className="text-right">
+            <Button
+              text="Submit"
+              onClick={() => addToast("success", "Form submitted")}
+            />
+          </div>
+        </Card>
       </Container>
     </div>
   );
