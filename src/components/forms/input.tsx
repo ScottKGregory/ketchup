@@ -29,7 +29,7 @@ interface Props {
   placeholder?: string;
   help?: string;
 }
-
+// https://react-hook-form.com/get-started ??????
 export default function Input(props: Props) {
   const { labelClasses, inputClasses, helpClasses, wrapperClasses } =
     useMemo(() => {
@@ -81,7 +81,7 @@ export default function Input(props: Props) {
         helpClasses,
         wrapperClasses: "mb-6",
       };
-    }, [props.state]);
+    }, [props.state, props.type]);
 
   if (props.type === "toggle") {
     return (
