@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import type { ReactElement, ReactNode } from "react";
 import { TextAlignment, type Alignment } from "../helpers/classes";
 import Typography from "./typography";
+import Card from "./card";
 
 interface Column<T extends object> {
   heading: ReactElement | string;
@@ -30,7 +31,7 @@ export default function Table<T extends object>(props: Props<T>) {
     return b ? "yes" : "no";
   };
 
-  const renderColumn = (val: T, col: Column<T>) => {
+  const getData = (val: T, col: Column<T>) => {
     let ret;
     if (col.render) {
       ret = col.render(val);
@@ -64,7 +65,12 @@ export default function Table<T extends object>(props: Props<T>) {
       }
     }
 
+    return ret;
+  };
+
+  const renderColumn = (val: T, col: Column<T>) => {
     const classes = classNames(TextAlignment(col.align), cellClasses);
+    const ret = getData(val, col);
     return props.leftHeading ? (
       <th scope="row" className={classes}>
         <Typography type="span">{ret as ReactNode}</Typography>
@@ -77,35 +83,66 @@ export default function Table<T extends object>(props: Props<T>) {
   };
 
   return (
-    <table className="w-full">
-      {props.caption && <caption>{props.caption}</caption>}
-      <thead>
-        <tr>
-          {props.columns.map((col) => (
-            <th
-              scope="col"
-              className={classNames(TextAlignment(col.align), cellClasses)}
+    <>
+      <table className="hidden w-full md:table">
+        {props.caption && <caption>{props.caption}</caption>}
+        <thead>
+          <tr>
+            {props.columns.map((col) => (
+              <th
+                scope="col"
+                className={classNames(TextAlignment(col.align), cellClasses)}
+              >
+                <Typography type="span">{col.heading}</Typography>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((val) => (
+            <tr
+              className={classNames(
+                "hover:bg-gray-100 hover:dark:bg-gray-800",
+                {
+                  "hover:cursor-pointer": !!props.onRowClick,
+                },
+              )}
+              onClick={
+                props.onRowClick ? () => props.onRowClick!(val) : undefined
+              }
             >
-              <Typography type="span">{col.heading}</Typography>
-            </th>
+              {props.columns.map((col) => renderColumn(val, col))}
+            </tr>
           ))}
-        </tr>
-      </thead>
-      <tbody>
+        </tbody>
+        {props.footer && <tfoot>{props.footer}</tfoot>}
+      </table>
+
+      <div className="flex flex-col gap-2 md:hidden">
         {props.data.map((val) => (
-          <tr
-            className={classNames("hover:bg-gray-100 hover:dark:bg-gray-800", {
-              "hover:cursor-pointer": !!props.onRowClick,
-            })}
+          <Card
+            level="secondary"
             onClick={
               props.onRowClick ? () => props.onRowClick!(val) : undefined
             }
           >
-            {props.columns.map((col) => renderColumn(val, col))}
-          </tr>
+            <div className="flex flex-col">
+              {props.columns.map((col) => (
+                <>
+                  <Typography className="mb-0 inline-flex w-full justify-between gap-2">
+                    <Typography type="label" bold>
+                      {col.heading}
+                    </Typography>
+                    {getData(val, col)}
+                  </Typography>
+                </>
+              ))}
+            </div>
+          </Card>
         ))}
-      </tbody>
-      {props.footer && <tfoot>{props.footer}</tfoot>}
-    </table>
+
+        {props.footer && <tfoot>{props.footer}</tfoot>}
+      </div>
+    </>
   );
 }
