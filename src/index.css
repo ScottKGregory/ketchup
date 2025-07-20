@@ -9,3 +9,19 @@
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform;
   }
 }
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@utility scrollbar-stable {
+  scrollbar-gutter: stable;
+}

@@ -10,6 +10,9 @@ import Typography from "./components/typography";
 import Spinner from "./components/spinner";
 import Button from "./components/button";
 import Input from "./components/forms/input";
+import Modal from "./components/modal";
+import Timeline from "./components/timeline";
+import type { IconName } from "./components/icon";
 
 interface Produce {
   id: number;
@@ -46,6 +49,70 @@ function Content() {
     setEnd(newEnd);
   };
 
+  const sampleText = (
+    <>
+      <Typography type="subtitle">It's a wonderful sauce</Typography>
+      <Typography type="drop-cap" columns={2}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non
+        venenatis dolor. Cras laoreet elit sit amet cursus consequat. Ut a
+        dapibus libero, maximus vulputate enim. Vivamus fringilla at odio id
+        bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
+        at ante rhoncus, placerat velit iaculis, elementum lectus. Morbi erat
+        lorem, imperdiet eget pharetra vitae, luctus nec nisl. Pellentesque arcu
+        ipsum, vehicula in enim quis, rhoncus laoreet urna. Ut volutpat nibh
+        metus, et dictum leo iaculis ac. Donec nec ante sapien. Maecenas massa
+        lacus, vulputate at euismod non, facilisis vel massa. Sed porta metus
+        non posuere accumsan. Donec sem metus, hendrerit eget pharetra nec,
+        commodo non ex. Curabitur nec dolor sed turpis condimentum dapibus ac
+        vehicula nisl. Nullam nec venenatis ex. Proin pulvinar diam sed augue
+        pellentesque fringilla.
+      </Typography>
+      <Typography>
+        Duis ut lacinia augue, sed ultricies nunc. Vestibulum ut enim mi.
+        Phasellus ac massa ullamcorper ligula feugiat efficitur. Nulla fermentum
+        sapien nisl. Sed commodo leo quis erat vulputate, sed tempor nunc
+        volutpat. Mauris vitae scelerisque odio. Nunc auctor quam justo, sed
+        dapibus nibh semper id. Aliquam et tellus at sapien tincidunt ultricies
+        vitae nec velit. Aenean fringilla dui ut nulla fringilla, id
+        pellentesque velit interdum. Proin blandit sagittis purus.
+      </Typography>
+      <Typography>
+        Suspendisse eget ligula vel odio sagittis bibendum. Pellentesque ac quam
+        tempus, iaculis nisl ac, pellentesque magna.{" "}
+        <Typography underlined type="span">
+          Pellentesque tincidunt tincidunt nibh, gravida semper urna imperdiet
+          in.{" "}
+        </Typography>
+        Pellentesque commodo, metus eu dignissim dapibus, magna sapien interdum
+        nibh, sit amet tincidunt orci massa eu libero. Pellentesque id tellus ut
+        purus efficitur mattis tincidunt non purus. Fusce venenatis dui in
+        rhoncus tempus. Mauris elit magna, ultricies et mi a, aliquet maximus
+        dui.{" "}
+        <Typography type="span" strike>
+          Vivamus bibendum velit sit amet odio dictum, vel varius quam finibus.
+        </Typography>{" "}
+        In auctor, est in tincidunt lacinia, neque turpis congue ipsum, vel
+        semper justo felis eget dui.
+      </Typography>
+      <Typography type="blockquote">
+        Well, He broke the mold when He made me. He made me very special. - Mrs.
+        Doubtfire
+      </Typography>
+      <Typography type="code">
+        {`{
+  "name": "John Doe",
+  "age": 30,
+  "city": "New York",
+  "isStudent": false,
+  "address": {
+    "street": "123 Main St",
+    "zipCode": "10001"
+  },
+  "hobbies": ["reading", "hiking"]
+}`}
+      </Typography>
+    </>
+  );
   return (
     <div>
       <Navbar
@@ -58,82 +125,40 @@ function Content() {
       />
 
       <Container>
-        <Spinner loading={loading}>
-          <Card padding="xl">
-            <Typography type="h2">Ketchup!</Typography>
-            <Typography type="subtitle">It's a wonderful sauce</Typography>
-            <Typography type="drop-cap" columns={2}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non
-              venenatis dolor. Cras laoreet elit sit amet cursus consequat. Ut a
-              dapibus libero, maximus vulputate enim. Vivamus fringilla at odio
-              id bibendum. Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Etiam at ante rhoncus, placerat velit iaculis, elementum
-              lectus. Morbi erat lorem, imperdiet eget pharetra vitae, luctus
-              nec nisl. Pellentesque arcu ipsum, vehicula in enim quis, rhoncus
-              laoreet urna. Ut volutpat nibh metus, et dictum leo iaculis ac.
-              Donec nec ante sapien. Maecenas massa lacus, vulputate at euismod
-              non, facilisis vel massa. Sed porta metus non posuere accumsan.
-              Donec sem metus, hendrerit eget pharetra nec, commodo non ex.
-              Curabitur nec dolor sed turpis condimentum dapibus ac vehicula
-              nisl. Nullam nec venenatis ex. Proin pulvinar diam sed augue
-              pellentesque fringilla.
-            </Typography>
-            <Typography>
-              Duis ut lacinia augue, sed ultricies nunc. Vestibulum ut enim mi.
-              Phasellus ac massa ullamcorper ligula feugiat efficitur. Nulla
-              fermentum sapien nisl. Sed commodo leo quis erat vulputate, sed
-              tempor nunc volutpat. Mauris vitae scelerisque odio. Nunc auctor
-              quam justo, sed dapibus nibh semper id. Aliquam et tellus at
-              sapien tincidunt ultricies vitae nec velit. Aenean fringilla dui
-              ut nulla fringilla, id pellentesque velit interdum. Proin blandit
-              sagittis purus.
-            </Typography>
-            <Typography>
-              Suspendisse eget ligula vel odio sagittis bibendum. Pellentesque
-              ac quam tempus, iaculis nisl ac, pellentesque magna.{" "}
-              <Typography underlined type="span">
-                Pellentesque tincidunt tincidunt nibh, gravida semper urna
-                imperdiet in.{" "}
-              </Typography>
-              Pellentesque commodo, metus eu dignissim dapibus, magna sapien
-              interdum nibh, sit amet tincidunt orci massa eu libero.
-              Pellentesque id tellus ut purus efficitur mattis tincidunt non
-              purus. Fusce venenatis dui in rhoncus tempus. Mauris elit magna,
-              ultricies et mi a, aliquet maximus dui.{" "}
-              <Typography type="span" strike>
-                Vivamus bibendum velit sit amet odio dictum, vel varius quam
-                finibus.
-              </Typography>{" "}
-              In auctor, est in tincidunt lacinia, neque turpis congue ipsum,
-              vel semper justo felis eget dui.
-            </Typography>
-            <Typography type="blockquote">
-              Well, He broke the mold when He made me. He made me very special.
-              - Mrs. Doubtfire
-            </Typography>
-            <Typography type="code">
-              {`{
-  "name": "John Doe",
-  "age": 30,
-  "city": "New York",
-  "isStudent": false,
-  "address": {
-    "street": "123 Main St",
-    "zipCode": "10001"
-  },
-  "hobbies": ["reading", "hiking"]
-}`}
-            </Typography>
-          </Card>
-        </Spinner>
-      </Container>
-
-      <Container>
         <Button
           onClick={() => setLoading((l) => !l)}
           text="Toggle loading"
           loading={loading}
         />
+        <Modal header="Ketchup!" linkText="Open Modal" icon={{ icon: "eye" }}>
+          {sampleText}
+        </Modal>
+        <Modal
+          header="Ketchup!"
+          linkText="Open Timeline"
+          icon={{ icon: "timeline" }}
+        >
+          <Timeline
+            events={mockData.foods.map((f) => ({
+              icon: {
+                icon: f.icon as IconName,
+              },
+              title: f.name,
+              subtitle: f.cost,
+              body: f.description,
+              tag: f.origin,
+            }))}
+          />
+        </Modal>
+      </Container>
+
+      <Container>
+        <Spinner loading={loading}>
+          <Card padding="xl">
+            <Typography type="h2">Ketchup!</Typography>
+            {sampleText}
+          </Card>
+        </Spinner>
       </Container>
 
       <Container>

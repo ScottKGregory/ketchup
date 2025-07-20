@@ -1,5 +1,14 @@
 export type Alignment = "left" | "right" | "center" | "justify" | undefined;
-export type Size = "2xl" | "xl" | "lg" | "md" | "sm" | "xs" | undefined;
+export type Size =
+  | "4xl"
+  | "3xl"
+  | "2xl"
+  | "xl"
+  | "lg"
+  | "md"
+  | "sm"
+  | "xs"
+  | undefined;
 
 export const TextAlignment = (align: Alignment): string => {
   switch (align) {
@@ -37,6 +46,10 @@ export const Padding = (size: Size): string => {
 
 export const TextSize = (size: Size): string => {
   switch (size) {
+    case "4xl":
+      return "text-4xl";
+    case "3xl":
+      return "text-3xl";
     case "2xl":
       return "text-2xl";
     case "xl":

@@ -32,12 +32,13 @@ interface Props extends PropsWithChildren {
   uppercase?: boolean;
   columns?: 1 | 2 | 3 | 4;
   size?: Size;
+  noColour?: boolean;
 
   className?: string;
 }
 
 export default function Typography(props: Props) {
-  const textColour = "text-gray-700 dark:text-gray-300";
+  const textColour = props.noColour ? "" : "text-gray-700 dark:text-gray-300";
   let classes = classNames(
     "font-sans",
     "last:mb-0",

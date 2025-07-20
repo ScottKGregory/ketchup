@@ -27,7 +27,7 @@ export default function Navbar(props: Props) {
           </Typography>
         </a>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
-          <Button text="Login" />
+          <Button icon={{ icon: "right-to-bracket" }} noBackground />
         </div>
         <div className="order-1 flex w-full items-center justify-between md:w-auto">
           <ul className="mt-0 flex flex-row space-x-8 rounded-lg border-0 p-0 font-medium rtl:space-x-reverse">
@@ -38,9 +38,9 @@ export default function Navbar(props: Props) {
                   <a
                     href={link.to}
                     className={classNames({
-                      "bg-primary-700 text-primary-700 block rounded-sm bg-transparent p-0":
+                      "block rounded-sm bg-transparent p-0 text-primary-600":
                         link.active,
-                      "hover:text-primary-700 block rounded-sm p-0 text-gray-900 hover:bg-gray-100 hover:bg-transparent dark:text-gray-100":
+                      "block rounded-sm p-0 text-gray-900 hover:bg-gray-100 hover:bg-transparent hover:text-primary-600 dark:text-gray-100":
                         !link.active,
                     })}
                   >

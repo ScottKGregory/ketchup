@@ -35,5 +35,6 @@ export default {
       },
     },
   },
+  safelist: ["text-primary-{50,{100..900..100},950}"],
   plugins: [],
 };

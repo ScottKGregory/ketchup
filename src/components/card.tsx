@@ -11,7 +11,7 @@ export default function Card(props: Props) {
   return (
     <section
       className={classNames(
-        "rounded-lg shadow-lg dark:bg-gray-900",
+        "rounded-lg bg-white shadow-lg dark:bg-gray-900",
         props.className,
         Padding(props.padding),
       )}
