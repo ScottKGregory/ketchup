@@ -13,6 +13,7 @@ import Input from "./components/forms/input";
 import Modal from "./components/modal";
 import Timeline from "./components/timeline";
 import type { IconName } from "./components/icon";
+import type { Colour } from "./helpers/classes";
 
 interface Produce {
   id: number;
@@ -47,6 +48,36 @@ function Content() {
     setFoods(mockData.foods.slice(newStart, newEnd));
     setStart(newStart);
     setEnd(newEnd);
+  };
+
+  const randomColour = () => {
+    return randInArray([
+      "red",
+      "orange",
+      "amber",
+      "yellow",
+      "lime",
+      "green",
+      "emerald",
+      "teal",
+      "cyan",
+      "sky",
+      "blue",
+      "indigo",
+      "violet",
+      "purple",
+      "fuchsia",
+      "pink",
+      "rose",
+      "slate",
+      "gray",
+      "zinc",
+      "neutral",
+      "stone",
+      "black",
+      "white",
+      "primary",
+    ]) as Colour;
   };
 
   const sampleText = (
@@ -142,11 +173,15 @@ function Content() {
             events={mockData.foods.map((f) => ({
               icon: {
                 icon: f.icon as IconName,
+                iconColour: randomColour(),
               },
               title: f.name,
               subtitle: f.cost,
               body: f.description,
-              tag: f.origin,
+              tags: [
+                { text: f.origin, colour: randomColour() },
+                { text: f.cost, colour: randomColour() },
+              ],
             }))}
           />
         </Modal>

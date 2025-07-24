@@ -9,6 +9,32 @@ export type Size =
   | "sm"
   | "xs"
   | undefined;
+export type Colour =
+  | "red"
+  | "orange"
+  | "amber"
+  | "yellow"
+  | "lime"
+  | "green"
+  | "emerald"
+  | "teal"
+  | "cyan"
+  | "sky"
+  | "blue"
+  | "indigo"
+  | "violet"
+  | "purple"
+  | "fuchsia"
+  | "pink"
+  | "rose"
+  | "slate"
+  | "gray"
+  | "zinc"
+  | "neutral"
+  | "stone"
+  | "black"
+  | "white"
+  | "primary";
 
 export const TextAlignment = (align: Alignment): string => {
   switch (align) {
@@ -65,4 +91,20 @@ export const TextSize = (size: Size): string => {
     default:
       return "";
   }
+};
+
+export const GetColour = (
+  prefix: "text" | "bg",
+  colour?: Colour,
+  shade?: string | number,
+) => {
+  if (!colour) {
+    return "";
+  }
+
+  if (shade && colour !== "white" && colour !== "black") {
+    return `${prefix}-${colour}-${shade}`;
+  }
+
+  return `${prefix}-${colour}`;
 };

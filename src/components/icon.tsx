@@ -6,20 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import { type CSSProperties } from "react";
 import Typography from "./typography";
-
-export type IconColor =
-  | "red"
-  | "orange"
-  | "yellow"
-  | "green"
-  | "blue"
-  | "white"
-  | "primary";
+import { GetColour, type Colour } from "../helpers/classes";
 
 export interface Props {
   icon?: FaIconName;
   iconPrefix?: IconPrefix;
-  iconColour?: IconColor;
+  iconColour?: Colour;
   iconSpin?: boolean;
   iconBadge?: string;
   iconStack?: FaIconName;
@@ -52,15 +44,7 @@ export default function Icon(props: Props) {
   style["--fa-primary-color"] = props.primaryColour;
   style["--fa-secondary-color"] = props.secondaryColour;
 
-  const cn = classNames({
-    "text-green-500": props.iconColour === "green",
-    "text-orange-500": props.iconColour === "orange",
-    "text-yellow-500": props.iconColour === "yellow",
-    "text-red-500": props.iconColour === "red",
-    "text-blue-500": props.iconColour === "blue",
-    "text-white": props.iconColour === "white",
-    "text-primary": props.iconColour === "primary",
-  });
+  const cn = classNames(GetColour("text", props.iconColour, 500));
 
   if (props.iconStack) {
     return (
@@ -100,7 +84,7 @@ export default function Icon(props: Props) {
   }
 
   return (
-    <Typography type="span" className={classNames("-pb-1")} noColour>
+    <Typography type="span" className={classNames("-pb-1", cn)} noColour>
       <FontAwesomeIcon
         className={classNames(cn, props.className)}
         icon={{ prefix: prefix, iconName: icon }}

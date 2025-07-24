@@ -55,7 +55,11 @@ export default function Button(props: PropsWithChildren<Props>) {
     >
       {props.loading && <Spinner loading inline />}
       {!props.loading && props.icon && (
-        <Icon {...props.icon} className="text-lg" iconColour="white" />
+        <Icon
+          {...props.icon}
+          className="-mb-0.5 p-0 text-lg"
+          iconColour="white"
+        />
       )}
       {props.text}
       {props.children}
