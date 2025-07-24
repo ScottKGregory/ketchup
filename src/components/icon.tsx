@@ -57,6 +57,7 @@ export default function Icon(props: Props) {
           icon={{ prefix: stackPrefix, iconName: props.iconStack }}
           spin={props.iconSpin}
           fixedWidth={props.fixedWidth}
+          width="automatic"
           style={style}
         />
         <FontAwesomeIcon
@@ -76,6 +77,7 @@ export default function Icon(props: Props) {
           spin={props.iconSpin}
           className={cn}
           fixedWidth={props.fixedWidth}
+          width="automatic"
           style={style}
         />
         <span className="fa-layers-counter">{props.iconBadge}</span>
@@ -90,6 +92,7 @@ export default function Icon(props: Props) {
         icon={{ prefix: prefix, iconName: icon }}
         spin={props.iconSpin}
         fixedWidth={props.fixedWidth}
+        width="automatic"
         style={style}
       />
     </Typography>
