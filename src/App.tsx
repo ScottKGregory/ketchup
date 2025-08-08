@@ -200,7 +200,7 @@ function Content() {
         <Spinner loading={loading}>
           <Card padding="lg">
             <Typography type="h2">Tables</Typography>
-            <Typography type="subtitle">TIme to get tabular!</Typography>
+            <Typography type="subtitle">Time to get tabular!</Typography>
             <Paginator
               top={false}
               label="Foods"

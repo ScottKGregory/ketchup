@@ -12,6 +12,9 @@ interface Props {
   float?: "right" | "left";
   icon?: IconProps;
   noBackground?: boolean;
+
+  link?: string;
+  download?: boolean;
 }
 
 export default function Button(props: PropsWithChildren<Props>) {
@@ -34,6 +37,15 @@ export default function Button(props: PropsWithChildren<Props>) {
     },
     props.className,
   );
+
+  if (props.link) {
+    return (
+      <a className={classes} href={props.link} download={props.download}>
+        <Icon {...props.icon} className="text-lg" />
+        {props.text}
+      </a>
+    );
+  }
 
   if (props.icon && !props.text) {
     return (

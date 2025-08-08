@@ -15,7 +15,13 @@ export interface Props {
 }
 
 export default function PortalExample(props: PropsWithChildren<Props>) {
-  const [open, setOpen] = useState(props.open);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (props.open !== undefined) {
+      setOpen(props.open);
+    }
+  }, [props.open]);
 
   const transitions = useTransition(open, {
     expires: 0,
@@ -42,7 +48,12 @@ export default function PortalExample(props: PropsWithChildren<Props>) {
           {open && (
             <div
               className="fixed left-0 top-0 h-full w-full bg-black bg-opacity-40 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                if (props.onClose) {
+                  props.onClose();
+                }
+                setOpen(false);
+              }}
             />
           )}
 
@@ -60,7 +71,12 @@ export default function PortalExample(props: PropsWithChildren<Props>) {
                           <Button
                             noBackground
                             icon={{ icon: "close", iconPrefix: "fas" }}
-                            onClick={() => setOpen(false)}
+                            onClick={() => {
+                              if (props.onClose) {
+                                props.onClose();
+                              }
+                              setOpen(false);
+                            }}
                           />
                         </div>
                         <div className="flex-1">{props.children}</div>

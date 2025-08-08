@@ -1,10 +1,10 @@
 import classNames from "classnames";
-import dayjs from "dayjs";
 import { useState, type ReactElement, type ReactNode } from "react";
 import { TextAlignment, type Alignment } from "../helpers/classes";
 import Typography from "./typography";
 import Card from "./card";
 import Modal, { type Props as ModalProps } from "./modal";
+import formatDate from "../helpers/dates";
 
 interface Column<T extends object> {
   heading: ReactElement | string;
@@ -60,8 +60,12 @@ function getData<T extends object>(val: T, col: Column<T>) {
         break;
     }
 
+    if (!v) {
+      return "-";
+    }
+
     if (v instanceof Date) {
-      ret = dayjs(v).format("MMM D, YYYY h:mm A");
+      ret = formatDate(v);
     }
   }
 
@@ -167,7 +171,7 @@ function Row<T extends object>(props: RowProps<T>) {
   return (
     <tr
       className={classNames("hover:bg-gray-100 hover:dark:bg-gray-800", {
-        "hover:cursor-pointer": !!props.onRowClick,
+        "hover:cursor-pointer": !!props.onRowClick || !!props.modal,
       })}
       onClick={() => {
         if (props.modal) {

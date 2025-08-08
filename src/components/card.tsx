@@ -6,6 +6,7 @@ interface Props extends PropsWithChildren {
   className?: string;
   padding?: Size;
   level?: "root" | "secondary";
+  noBackground?: boolean;
   onClick?: () => void;
 }
 
@@ -16,8 +17,14 @@ export default function Card(props: Props) {
     <section
       className={classNames(
         "rounded-lg",
-        { "bg-white shadow-lg dark:bg-gray-900": level === "root" },
-        { "bg-gray-200 shadow-lg dark:bg-gray-800": level === "secondary" },
+        {
+          "bg-white shadow-lg dark:bg-gray-900":
+            level === "root" && !props.noBackground,
+        },
+        {
+          "bg-gray-200 shadow-lg dark:bg-gray-800":
+            level === "secondary" && !props.noBackground,
+        },
         { "hover:cursor-pointer": props.onClick },
         props.className,
         Padding(props.padding),

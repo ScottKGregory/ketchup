@@ -33,6 +33,7 @@ interface Props extends PropsWithChildren {
   columns?: 1 | 2 | 3 | 4;
   size?: Size;
   noColour?: boolean;
+  noMargin?: boolean;
 
   className?: string;
 }
@@ -52,7 +53,6 @@ export default function Typography(props: Props) {
     TextAlignment(props.align),
     TextSize(props.size),
     textColour,
-    props.className,
   );
 
   switch (props.columns) {
@@ -75,7 +75,9 @@ export default function Typography(props: Props) {
         <p
           className={classNames(
             classes,
-            "-mt-2 mb-4 font-heading text-lg font-light",
+            { "-mt-2 mb-4": !props.noMargin },
+            "font-heading text-lg font-light",
+            props.className,
           )}
         >
           {props.children}
@@ -87,6 +89,7 @@ export default function Typography(props: Props) {
           className={classNames(
             classes,
             "mb-4 font-heading text-5xl font-extrabold",
+            props.className,
           )}
         >
           {props.children}
@@ -97,7 +100,9 @@ export default function Typography(props: Props) {
         <h2
           className={classNames(
             classes,
-            "mb-4 font-heading text-4xl font-bold",
+            { "mb-4": !props.noMargin },
+            "font-heading text-4xl font-bold",
+            props.className,
           )}
         >
           {props.children}
@@ -108,7 +113,9 @@ export default function Typography(props: Props) {
         <h3
           className={classNames(
             classes,
-            "mb-4 font-heading text-3xl font-bold",
+            { "mb-4": !props.noMargin },
+            "font-heading text-3xl font-bold",
+            props.className,
           )}
         >
           {props.children}
@@ -119,7 +126,9 @@ export default function Typography(props: Props) {
         <h4
           className={classNames(
             classes,
-            "mb-4 font-heading text-2xl font-bold",
+            { "mb-4": !props.noMargin },
+            "font-heading text-2xl font-bold",
+            props.className,
           )}
         >
           {props.children}
@@ -128,7 +137,12 @@ export default function Typography(props: Props) {
     case "h5":
       return (
         <h5
-          className={classNames(classes, "mb-4 font-heading text-xl font-bold")}
+          className={classNames(
+            classes,
+            { "mb-4": !props.noMargin },
+            "font-heading text-xl font-bold",
+            props.className,
+          )}
         >
           {props.children}
         </h5>
@@ -136,7 +150,12 @@ export default function Typography(props: Props) {
     case "h6":
       return (
         <h6
-          className={classNames(classes, "mb-4 font-heading text-lg font-bold")}
+          className={classNames(
+            classes,
+            { "mb-4": !props.noMargin },
+            "font-heading text-lg font-bold",
+            props.className,
+          )}
         >
           {props.children}
         </h6>
@@ -144,7 +163,13 @@ export default function Typography(props: Props) {
     case "leading":
       return (
         <p
-          className={classNames(classes, "mb-3 text-lg md:text-xl", textColour)}
+          className={classNames(
+            classes,
+            { "mb-3": !props.noMargin },
+            "text-lg md:text-xl",
+            textColour,
+            props.className,
+          )}
         >
           {props.children}
         </p>
@@ -154,9 +179,10 @@ export default function Typography(props: Props) {
         <p
           className={classNames(
             classes,
-            "mb-3",
+            { "mb-3": !props.noMargin },
             textColour,
             "first-letter:float-start first-letter:me-3 first-letter:text-7xl first-letter:font-bold first-letter:text-gray-900 dark:first-letter:text-gray-100",
+            props.className,
           )}
         >
           {props.children}
@@ -167,13 +193,16 @@ export default function Typography(props: Props) {
         <blockquote
           className={classNames(
             classes,
-            "my-8 border-s-4 border-gray-300 bg-gray-50 p-4 dark:bg-gray-800",
+            { "my-8": !props.noMargin },
+            "border-s-4 border-gray-300 bg-gray-50 p-4 dark:bg-gray-800",
+            props.className,
           )}
         >
           <p
             className={classNames(
               classes,
               "text-xl font-medium italic leading-relaxed text-gray-900",
+              props.className,
             )}
           >
             "{props.children}"
@@ -183,21 +212,42 @@ export default function Typography(props: Props) {
     case "code":
       return (
         <pre
-          className={classNames(classes, "mb-3 font-mono text-sm", textColour)}
+          className={classNames(
+            classes,
+            { "mb-3": !props.noMargin },
+            "font-mono text-sm",
+            textColour,
+            props.className,
+          )}
         >
           <code>{props.children}</code>
         </pre>
       );
     case "label":
       return (
-        <label className={classNames(classes, "mb-1 inline-block", textColour)}>
+        <label
+          className={classNames(
+            classes,
+            { "mb-1": !props.noMargin },
+            "inline-block",
+            textColour,
+            props.className,
+          )}
+        >
           {props.children}
         </label>
       );
     case "p":
     default:
       return (
-        <p className={classNames(classes, "mb-3", textColour)}>
+        <p
+          className={classNames(
+            classes,
+            { "mb-3": !props.noMargin },
+            textColour,
+            props.className,
+          )}
+        >
           {props.children}
         </p>
       );
