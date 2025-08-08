@@ -1,5 +1,5 @@
 import { animated, config, useTransition } from "@react-spring/web";
-import { useToast } from "../hooks/toast";
+import { useToast } from "../../hooks/toast";
 import { createPortal } from "react-dom";
 import { useMemo } from "react";
 import Typography from "./typography";
@@ -85,7 +85,7 @@ export default function Toast(props: Props) {
   }
   return (
     <div
-      className="flex w-full max-w-xs items-center rounded-lg bg-white p-4 shadow-md dark:bg-gray-800"
+      className="flex w-full max-w-xs items-center gap-2 rounded-lg bg-white p-4 shadow-md dark:bg-gray-800"
       role="alert"
     >
       {icon}
