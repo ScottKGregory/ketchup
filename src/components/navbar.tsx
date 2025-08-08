@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import Button from "./button";
 import Typography from "./typography";
+import Icon from "./icon";
 
 interface Link {
   title: string;
@@ -27,7 +27,11 @@ export default function Navbar(props: Props) {
           </Typography>
         </a>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
-          <Button icon={{ icon: "right-to-bracket" }} noBackground />
+          <a href="">
+            <Typography>
+              <Icon icon="right-to-bracket" />
+            </Typography>
+          </a>
         </div>
         <div className="order-1 flex w-full items-center justify-between md:w-auto">
           <ul className="mt-0 flex flex-row space-x-8 rounded-lg border-0 p-0 font-medium rtl:space-x-reverse">

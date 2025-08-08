@@ -7,13 +7,15 @@ import Typography from "./typography";
 import { animated, useTransition } from "@react-spring/web";
 
 export interface Props {
+  open?: boolean;
+  onClose?: () => void;
   icon?: IconProps;
   linkText?: string;
   header: string;
 }
 
 export default function PortalExample(props: PropsWithChildren<Props>) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(props.open);
 
   const transitions = useTransition(open, {
     expires: 0,
