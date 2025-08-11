@@ -46,7 +46,7 @@ export default function Navbar(props: Props) {
                     className={classNames({
                       "block rounded-sm bg-transparent p-0 text-primary-600":
                         link.active,
-                      "block rounded-sm p-0 text-gray-900 hover:bg-gray-100 hover:bg-transparent hover:text-primary-600 dark:text-gray-100":
+                      "block rounded-sm p-0 text-gray-900 hover:text-primary-600 dark:text-gray-100":
                         !link.active,
                     })}
                   >

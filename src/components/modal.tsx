@@ -63,12 +63,13 @@ export default function PortalExample(props: PropsWithChildren<Props>) {
                 item && (
                   <animated.div style={style}>
                     <div className="pointer-events-auto relative mx-auto min-w-96 max-w-[50vw] pb-16 pt-32">
-                      <Card padding="lg">
+                      <Card padding="xl">
                         <div className="flex w-full justify-between">
                           <Typography type="h2" className="flex-1">
                             {props.header}
                           </Typography>
                           <Button
+                            className="mr-0 mt-0 pr-0 pt-0"
                             noBackground
                             icon={{ icon: "close", iconPrefix: "fas" }}
                             onClick={() => {

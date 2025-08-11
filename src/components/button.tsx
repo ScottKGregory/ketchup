@@ -35,12 +35,15 @@ export default function Button(props: PropsWithChildren<Props>) {
       "bg-transparent p-0 shadow-none hover:bg-transparent w-fit h-fit hover:text-primary-500":
         props.noBackground,
     },
-    props.className,
   );
 
   if (props.link) {
     return (
-      <a className={classes} href={props.link} download={props.download}>
+      <a
+        className={classNames(classes, props.className)}
+        href={props.link}
+        download={props.download}
+      >
         <Icon {...props.icon} className="text-lg" />
         {props.text}
       </a>
@@ -51,7 +54,11 @@ export default function Button(props: PropsWithChildren<Props>) {
     return (
       <button
         onClick={props.onClick}
-        className={classNames(classes, "aspect-square h-fit w-fit p-0 pt-5")}
+        className={classNames(
+          classes,
+          "aspect-square h-fit w-fit p-0 pt-5",
+          props.className,
+        )}
       >
         <Icon {...props.icon} className="text-lg" />
       </button>
@@ -61,7 +68,7 @@ export default function Button(props: PropsWithChildren<Props>) {
   return (
     <button
       type="button"
-      className={classes}
+      className={classNames(classes, props.className)}
       onClick={props.onClick}
       disabled={props.disabled}
     >
