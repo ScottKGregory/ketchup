@@ -147,6 +147,8 @@ function Content() {
   return (
     <div>
       <Navbar
+        logoSrc="ketchup.png"
+        heading="Ketchup"
         links={[
           { title: "Home", to: "", active: true },
           { title: "About", to: "" },

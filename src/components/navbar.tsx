@@ -10,20 +10,22 @@ interface Link {
 
 interface Props {
   links: Link[];
+  heading: string;
+  logoSrc: string;
 }
 
 export default function Navbar(props: Props) {
   return (
-    <nav className="fixed start-0 top-0 z-20 w-full border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+    <nav className="sticky start-0 top-0 z-20 w-full border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="ketchup.png" className="h-8" />
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <img src={props.logoSrc} className="h-8" />
           <Typography
             type="span"
             bold
             className="self-center whitespace-nowrap text-2xl"
           >
-            Ketchup
+            {props.heading}
           </Typography>
         </a>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">

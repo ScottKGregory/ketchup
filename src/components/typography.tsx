@@ -69,7 +69,11 @@ export default function Typography(props: Props) {
 
   switch (props.type) {
     case "span":
-      return <span className={classes}>{props.children}</span>;
+      return (
+        <span className={classNames(classes, props.className)}>
+          {props.children}
+        </span>
+      );
     case "subtitle":
       return (
         <p
