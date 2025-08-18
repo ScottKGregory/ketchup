@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Typography from "../typography";
 import { useMemo } from "react";
 
-interface Props {
+interface Props<T> {
   type:
     | "file"
     | "checkbox"
@@ -28,9 +28,11 @@ interface Props {
   label?: string;
   placeholder?: string;
   help?: string;
+  value?: T;
+  onChange?: (v: T) => void;
 }
 // https://react-hook-form.com/get-started ??????
-export default function Input(props: Props) {
+export default function Input<T>(props: Props<T>) {
   const { labelClasses, inputClasses, helpClasses, wrapperClasses } =
     useMemo(() => {
       let labelClasses = "";
@@ -91,8 +93,15 @@ export default function Input(props: Props) {
           className="me-6 inline-flex cursor-pointer items-center"
         >
           <input
+            value={props.value as string}
             type="checkbox"
-            value=""
+            onChange={(e) => {
+              if (props.onChange) {
+                console.log("changed", e);
+                e.preventDefault();
+                props.onChange(e.target.value as T);
+              }
+            }}
             className={classNames("peer sr-only")}
           />
           <div
@@ -123,14 +132,20 @@ export default function Input(props: Props) {
       <div className={wrapperClasses}>
         <div className="flex items-center">
           <input
+            value={props.value as string}
             checked
             id={props.id}
             type="checkbox"
-            value=""
             className={classNames(
               "h-4 w-4 rounded-sm border-gray-300 bg-gray-100 text-primary-600 outline-none focus:ring-primary-500 dark:focus:ring-primary-600",
               "accent-primary-600 focus:outline-none focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800",
             )}
+            onChange={(e) => {
+              if (props.onChange) {
+                e.preventDefault();
+                props.onChange(e.target.value as T);
+              }
+            }}
           />
           <Typography type="label" className={classNames(labelClasses, "ms-2")}>
             {props.label}
@@ -150,10 +165,17 @@ export default function Input(props: Props) {
         {props.label}
       </Typography>
       <input
+        value={props.value as string}
         type={props.type}
         id={props.id}
         className={classNames(inputClasses)}
         placeholder={props.placeholder}
+        onChange={(e) => {
+          if (props.onChange) {
+            e.preventDefault();
+            props.onChange(e.target.value as T);
+          }
+        }}
       />
       <Typography size="sm" className={classNames("mt-2", helpClasses)}>
         {props.help}

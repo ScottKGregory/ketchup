@@ -4,6 +4,7 @@ import React, {
   useCallback,
   type PropsWithChildren,
   useEffect,
+  useRef,
 } from "react";
 import {
   ToastContainer,
@@ -28,7 +29,7 @@ const ToastProvider = ({ children }: PropsWithChildren) => {
     if (toasts.length > 0) {
       const timer = setTimeout(
         () => setToasts((toasts) => toasts.slice(1)),
-        5000
+        5000,
       );
       return () => clearTimeout(timer);
     }
@@ -38,7 +39,7 @@ const ToastProvider = ({ children }: PropsWithChildren) => {
     (id: string) => {
       setToasts((toasts) => toasts.filter((t) => t.id !== id));
     },
-    [setToasts]
+    [setToasts],
   );
 
   const addToast = useCallback(
@@ -48,7 +49,7 @@ const ToastProvider = ({ children }: PropsWithChildren) => {
         { id: crypto.randomUUID(), level, content },
       ]);
     },
-    [setToasts]
+    [setToasts],
   );
 
   return (
@@ -65,9 +66,9 @@ const ToastProvider = ({ children }: PropsWithChildren) => {
 };
 
 const useToast = () => {
-  const toastHelpers = useContext(ToastContext);
+  const toastHelpers = useRef(useContext(ToastContext));
 
-  return toastHelpers;
+  return toastHelpers.current;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

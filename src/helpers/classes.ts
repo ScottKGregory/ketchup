@@ -51,22 +51,22 @@ export const TextAlignment = (align: Alignment): string => {
   }
 };
 
-export const Padding = (size: Size): string => {
+export const Padding = (size: Size, prefix: string = "p"): string => {
   switch (size) {
     case "2xl":
-      return "p-32";
+      return `${prefix}-32`;
     case "xl":
-      return "p-16";
+      return `${prefix}-16`;
     case "lg":
-      return "p-8";
+      return `${prefix}-8`;
     case "md":
-      return "p-4";
+      return `${prefix}-4`;
     case "sm":
-      return "p-2";
+      return `${prefix}-2`;
     case "xs":
-      return "p-1";
+      return `${prefix}-1`;
     default:
-      return "p-4";
+      return `${prefix}-4`;
   }
 };
 
