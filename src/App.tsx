@@ -14,6 +14,7 @@ import Modal from "./components/modal";
 import Timeline from "./components/timeline";
 import type { IconName } from "./components/icon";
 import type { Colour } from "./helpers/classes";
+import Toggle from "./components/forms/toggle";
 
 interface Produce {
   id: number;
@@ -301,7 +302,7 @@ function Content() {
               />
             </div>
             <div className="flex-1">
-              <Input
+              <Toggle
                 type="toggle"
                 state="normal"
                 label="Normal Toggle"
@@ -309,7 +310,7 @@ function Content() {
                 id="normal"
                 help="Commodo proident eu nisi reprehenderit ad."
               />
-              <Input
+              <Toggle
                 type="toggle"
                 state="success"
                 label="Success Toggle"
@@ -317,7 +318,7 @@ function Content() {
                 id="success"
                 help="Do exercitation dolor consectetur incididunt sit aute."
               />
-              <Input
+              <Toggle
                 type="toggle"
                 state="error"
                 label="Error Toggle"

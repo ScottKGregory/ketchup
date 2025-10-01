@@ -4,7 +4,6 @@ import type {
 } from "@fortawesome/fontawesome-common-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
-import { type CSSProperties } from "react";
 import Typography from "./typography";
 import { GetColour, type Colour } from "../helpers/classes";
 
@@ -15,34 +14,35 @@ export interface Props {
   iconSpin?: boolean;
   iconBadge?: string;
   iconStack?: FaIconName;
-  primaryColour?: string;
-  secondaryColour?: string;
   stackPrefix?: IconPrefix;
-  fixedWidth?: boolean;
   rotate?: number;
+  size?:
+    | "2xs"
+    | "xs"
+    | "sm"
+    | "lg"
+    | "xl"
+    | "2xl"
+    | "1x"
+    | "2x"
+    | "3x"
+    | "4x"
+    | "5x"
+    | "6x"
+    | "7x"
+    | "8x"
+    | "9x"
+    | "10x";
 
   className?: string;
 }
 
 export type IconName = FaIconName;
 
-interface Style extends CSSProperties {
-  "--fa-primary-color"?: string;
-  "--fa-secondary-color"?: string;
-}
-
 export default function Icon(props: Props) {
   const prefix = props.iconPrefix ?? "fad";
   const stackPrefix = props.stackPrefix ?? "fas";
   const icon = props.icon || "question-circle";
-
-  const style: Style = {};
-
-  if (props.rotate) {
-    style.rotate = `${props.rotate}deg`;
-  }
-  style["--fa-primary-color"] = props.primaryColour;
-  style["--fa-secondary-color"] = props.secondaryColour;
 
   const cn = classNames(GetColour("text", props.iconColour, 500));
 
@@ -56,16 +56,13 @@ export default function Icon(props: Props) {
           className={classNames(cn, "fa-stack-1x")}
           icon={{ prefix: stackPrefix, iconName: props.iconStack }}
           spin={props.iconSpin}
-          fixedWidth={props.fixedWidth}
-          width="automatic"
-          style={style}
+          size={props.size}
         />
         <FontAwesomeIcon
           className={classNames(cn, "fa-stack-1x")}
           icon={{ prefix: prefix, iconName: icon }}
           spin={props.iconSpin}
-          fixedWidth={props.fixedWidth}
-          style={style}
+          size={props.size}
         />
       </span>
     );
@@ -76,9 +73,7 @@ export default function Icon(props: Props) {
           icon={{ prefix: prefix, iconName: icon }}
           spin={props.iconSpin}
           className={cn}
-          fixedWidth={props.fixedWidth}
-          width="automatic"
-          style={style}
+          size={props.size}
         />
         <span className="fa-layers-counter">{props.iconBadge}</span>
       </span>
@@ -91,9 +86,7 @@ export default function Icon(props: Props) {
         className={classNames(cn, props.className)}
         icon={{ prefix: prefix, iconName: icon }}
         spin={props.iconSpin}
-        fixedWidth={props.fixedWidth}
-        width="automatic"
-        style={style}
+        size={props.size}
       />
     </Typography>
   );

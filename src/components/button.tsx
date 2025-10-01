@@ -12,6 +12,7 @@ interface Props {
   float?: "right" | "left";
   icon?: IconProps;
   noBackground?: boolean;
+  noPadding?: boolean;
 
   link?: string;
   download?: boolean;
@@ -19,8 +20,9 @@ interface Props {
 
 export default function Button(props: PropsWithChildren<Props>) {
   const classes = classNames(
+    "hover:cursor-pointer",
     "shadow-md transition-all",
-    "mb-2 me-2 inline-flex rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white gap-2",
+    "mb-2 me-2 inline-flex rounded-lg bg-primary-700 text-sm font-medium text-white gap-2",
     "hover:bg-primary-800",
     {
       "focus:outline-hidden focus:ring-4 focus:ring-primary-300":
@@ -34,6 +36,10 @@ export default function Button(props: PropsWithChildren<Props>) {
     {
       "bg-transparent p-0 shadow-none hover:bg-transparent w-fit h-fit hover:text-primary-500":
         props.noBackground,
+    },
+    {
+      "p-0": props.noPadding,
+      "px-5 py-2.5": !props.noPadding,
     },
   );
 
@@ -56,7 +62,8 @@ export default function Button(props: PropsWithChildren<Props>) {
         onClick={props.onClick}
         className={classNames(
           classes,
-          "aspect-square h-fit w-fit p-0 pt-5",
+          "aspect-square h-fit w-fit",
+          { "p-0 pt-5": !props.noPadding },
           props.className,
         )}
       >

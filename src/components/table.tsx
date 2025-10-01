@@ -6,7 +6,11 @@ import Card from "./card";
 import Modal, { type Props as ModalProps } from "./modal";
 import formatDate from "../helpers/dates";
 
-interface Column<T extends object> {
+interface WithID {
+  id?: string | number;
+}
+
+interface Column<T extends WithID> {
   heading: ReactElement | string;
   key: keyof T;
   render?: (val: T) => ReactElement;
@@ -14,7 +18,7 @@ interface Column<T extends object> {
   align?: Alignment;
 }
 
-export interface Props<T extends object> {
+export interface Props<T extends WithID> {
   caption?: ReactElement;
   footer?: ReactElement;
   leftHeading?: boolean;
@@ -31,7 +35,7 @@ const boolToString = (b: boolean): string => {
   return b ? "yes" : "no";
 };
 
-function getData<T extends object>(val: T, col: Column<T>) {
+function getData<T extends WithID>(val: T, col: Column<T>) {
   let ret;
   if (col.render) {
     ret = col.render(val);
@@ -72,7 +76,7 @@ function getData<T extends object>(val: T, col: Column<T>) {
   return ret;
 }
 
-export default function Table<T extends object>(props: Props<T>) {
+export default function Table<T extends WithID>(props: Props<T>) {
   return (
     <>
       <table className="hidden w-full md:table">
@@ -83,6 +87,7 @@ export default function Table<T extends object>(props: Props<T>) {
               .filter((c) => c !== null)
               .map((col) => (
                 <th
+                  key={String(col.key)}
                   scope="col"
                   className={classNames(TextAlignment(col.align), cellClasses)}
                 >
@@ -93,7 +98,7 @@ export default function Table<T extends object>(props: Props<T>) {
         </thead>
         <tbody>
           {props.data.map((val) => (
-            <Row {...props} val={val} />
+            <Row key={`row-${val.id}`} {...props} val={val} />
           ))}
         </tbody>
         {props.footer && <tfoot>{props.footer}</tfoot>}
@@ -101,7 +106,7 @@ export default function Table<T extends object>(props: Props<T>) {
 
       <div className="flex flex-col gap-2 md:hidden">
         {props.data.map((val) => (
-          <Row {...props} val={val} card />
+          <Row key={`card-${val.id}`} {...props} val={val} card />
         ))}
 
         {props.footer && <tfoot>{props.footer}</tfoot>}
@@ -110,7 +115,7 @@ export default function Table<T extends object>(props: Props<T>) {
   );
 }
 
-interface RowProps<T extends object> {
+interface RowProps<T extends WithID> {
   val: T;
   leftHeading?: boolean;
   columns: (Column<T> | null)[];
@@ -119,7 +124,7 @@ interface RowProps<T extends object> {
   card?: boolean;
 }
 
-function Row<T extends object>(props: RowProps<T>) {
+function Row<T extends WithID>(props: RowProps<T>) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const renderColumn = (val: T, col: Column<T>) => {
@@ -170,6 +175,7 @@ function Row<T extends object>(props: RowProps<T>) {
 
   return (
     <tr
+      key={props.val.id}
       className={classNames("hover:bg-gray-100 dark:hover:bg-gray-800", {
         "hover:cursor-pointer": !!props.onRowClick || !!props.modal,
       })}
