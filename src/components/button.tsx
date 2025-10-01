@@ -23,7 +23,7 @@ export default function Button(props: PropsWithChildren<Props>) {
     "mb-2 me-2 inline-flex rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white gap-2",
     "hover:bg-primary-800",
     {
-      "focus:outline-none focus:ring-4 focus:ring-primary-300":
+      "focus:outline-hidden focus:ring-4 focus:ring-primary-300":
         !props.noBackground,
     },
     "disabled:bg-gray-400",

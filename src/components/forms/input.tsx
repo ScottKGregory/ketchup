@@ -76,7 +76,7 @@ export function getClasses({
       labelClasses = "text-red-700 dark:text-red-500";
       inputClasses = classNames(
         inputClasses,
-        "accent-red-700 outline-none focus:outline-none",
+        "accent-red-700 outline-hidden focus:outline-hidden",
         "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500",
         "dark:border-red-500 dark:bg-gray-700 dark:text-red-400 dark:placeholder-red-500",
       );
@@ -86,7 +86,7 @@ export function getClasses({
       labelClasses = "text-green-700 dark:text-green-500";
       inputClasses = classNames(
         inputClasses,
-        "accent-green-700 outline-none focus:outline-none",
+        "accent-green-700 outline-hidden focus:outline-hidden",
         "border-green-500 bg-green-50 text-green-900 placeholder-green-700 focus:border-green-500 focus:ring-green-500",
         "dark:border-green-500 dark:bg-gray-700 dark:text-green-400 dark:placeholder-green-500",
       );
@@ -97,7 +97,7 @@ export function getClasses({
       labelClasses = "";
       inputClasses = classNames(
         inputClasses,
-        "accent-primary-700 outline-none focus:outline-none",
+        "accent-primary-700 outline-hidden focus:outline-hidden",
         "bg-gray-50 border border-gray-300 text-gray-700 focus:ring-primary-500 focus:border-primary-500",
         "dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-300 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500",
       );

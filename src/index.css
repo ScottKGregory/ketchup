@@ -1,27 +1,45 @@
-@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap")
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer components {
-  .absolute-center {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform;
-  }
+@config '../tailwind.config.js';
+
+@utility absolute-center {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform;
 }
 
-@layer utilities {
+@utility no-scrollbar {
   /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 @utility scrollbar-stable {
   scrollbar-gutter: stable;
 }
+
+@source inline("{,}p-{32,16,8,4,2,1,4}");
+@source inline("{,}px-{32,16,8,4,2,1,4}");
+@source inline("{,}py-{32,16,8,4,2,1,4}");
+@source inline("{,}ps-{32,16,8,4,2,1,4}");
+@source inline("{,}pe-{32,16,8,4,2,1,4}");
+@source inline("{,}pt-{32,16,8,4,2,1,4}");
+@source inline("{,}pr-{32,16,8,4,2,1,4}");
+@source inline("{,}pb-{32,16,8,4,2,1,4}");
+@source inline("{,}pl-{32,16,8,4,2,1,4}");
+@source inline("{,}m-{32,16,8,4,2,1,4}");
+@source inline("{,}mx-{32,16,8,4,2,1,4}");
+@source inline("{,}my-{32,16,8,4,2,1,4}");
+@source inline("{,}ms-{32,16,8,4,2,1,4}");
+@source inline("{,}me-{32,16,8,4,2,1,4}");
+@source inline("{,}mt-{32,16,8,4,2,1,4}");
+@source inline("{,}mr-{32,16,8,4,2,1,4}");
+@source inline("{,}mb-{32,16,8,4,2,1,4}");
+@source inline("{,}ml-{32,16,8,4,2,1,4}");
+@source inline("text-{black,white,}");
+@source inline("bg-{black,white,}");
+@source inline("{dark:,}bg-{primary,slate,gray,zinc,neutral,stone,red,orange,amber,yellow,lime,green,emerald,teal,cyan,sky,blue,indigo,violet,purple,fuchsia,pink,rose}-{50,100,200,300,400,500,600,700,800,900,950}");

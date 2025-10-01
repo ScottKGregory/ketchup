@@ -1,5 +1,5 @@
 import { animated, config, useTransition } from "@react-spring/web";
-import { useToast } from "../../hooks/toast";
+import { useToast } from "../hooks/toast";
 import { createPortal } from "react-dom";
 import { useMemo } from "react";
 import Typography from "./typography";

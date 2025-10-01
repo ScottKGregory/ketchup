@@ -170,7 +170,7 @@ function Row<T extends object>(props: RowProps<T>) {
 
   return (
     <tr
-      className={classNames("hover:bg-gray-100 hover:dark:bg-gray-800", {
+      className={classNames("hover:bg-gray-100 dark:hover:bg-gray-800", {
         "hover:cursor-pointer": !!props.onRowClick || !!props.modal,
       })}
       onClick={() => {

@@ -18,7 +18,7 @@ export default function Spinner(props: Props) {
       {!props.inline && props.children && (
         <div
           className={classNames("rounded-lg transition-all duration-500", {
-            "pointer-events-none blur-sm": props.loading,
+            "pointer-events-none blur-xs": props.loading,
           })}
         >
           {props.children}

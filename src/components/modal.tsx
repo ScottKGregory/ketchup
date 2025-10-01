@@ -47,7 +47,7 @@ export default function PortalExample(props: PropsWithChildren<Props>) {
         <>
           {open && (
             <div
-              className="fixed left-0 top-0 h-full w-full bg-black bg-opacity-40 backdrop-blur-sm"
+              className="fixed left-0 top-0 h-full w-full bg-black bg-opacity-40 backdrop-blur-xs"
               onClick={() => {
                 if (props.onClose) {
                   props.onClose();
