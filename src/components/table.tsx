@@ -28,6 +28,7 @@ export interface Props<T extends WithID> {
 
   onRowClick?: (val: T) => void;
   modal?: (val: T) => ModalProps;
+  expand?: (val: T) => ReactNode;
 }
 
 const cellClasses = classNames("px-4 py-2 border-b dark:border-gray-700");
@@ -121,11 +122,13 @@ interface RowProps<T extends WithID> {
   columns: (Column<T> | null)[];
   onRowClick?: (val: T) => void;
   modal?: (val: T) => ModalProps;
+  expand?: (val: T) => ReactNode;
   card?: boolean;
 }
 
 function Row<T extends WithID>(props: RowProps<T>) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [rowOpen, setRowOpen] = useState(false);
 
   const renderColumn = (val: T, col: Column<T>) => {
     const classes = classNames(TextAlignment(col.align), cellClasses);
@@ -141,20 +144,39 @@ function Row<T extends WithID>(props: RowProps<T>) {
     );
   };
 
+  const openRow = rowOpen && !!props.expand && (
+    <tr>
+      <td colSpan={props.columns.length}>
+        <Card
+          className={classNames({
+            "mb-2 rounded-none border-t": !props.card,
+            "mt-2": props.card,
+          })}
+          level="tertiary"
+        >
+          {props.expand(props.val)}
+        </Card>
+      </td>
+    </tr>
+  );
+
+  const onClick = () => {
+    if (props.expand) {
+      setRowOpen((o) => !o);
+    }
+
+    if (props.modal) {
+      setModalOpen(true);
+    }
+
+    if (props.onRowClick) {
+      props.onRowClick!(props.val);
+    }
+  };
+
   if (props.card) {
     return (
-      <Card
-        level="secondary"
-        onClick={() => {
-          if (props.modal) {
-            setModalOpen(true);
-          }
-
-          if (props.onRowClick) {
-            props.onRowClick!(props.val);
-          }
-        }}
-      >
+      <Card level="secondary" onClick={onClick}>
         <div className="flex flex-col">
           {props.columns
             .filter((c) => c !== null)
@@ -168,37 +190,34 @@ function Row<T extends WithID>(props: RowProps<T>) {
                 </Typography>
               </>
             ))}
+          {openRow}
         </div>
       </Card>
     );
   }
 
   return (
-    <tr
-      key={props.val.id}
-      className={classNames("hover:bg-gray-100 dark:hover:bg-gray-800", {
-        "hover:cursor-pointer": !!props.onRowClick || !!props.modal,
-      })}
-      onClick={() => {
-        if (props.modal) {
-          setModalOpen(true);
-        }
-
-        if (props.onRowClick) {
-          props.onRowClick!(props.val);
-        }
-      }}
-    >
-      {props.columns
-        .filter((c) => c !== null)
-        .map((col) => renderColumn(props.val, col))}
-      {props.modal ? (
-        <Modal
-          {...props.modal(props.val)}
-          open={modalOpen}
-          onClose={() => setModalOpen(false)}
-        ></Modal>
-      ) : undefined}
-    </tr>
+    <>
+      <tr
+        key={props.val.id}
+        className={classNames("hover:bg-gray-100 dark:hover:bg-gray-800", {
+          "hover:cursor-pointer": !!props.onRowClick || !!props.modal,
+          "bg-gray-100 shadow-lg dark:bg-gray-700": rowOpen,
+        })}
+        onClick={onClick}
+      >
+        {props.columns
+          .filter((c) => c !== null)
+          .map((col) => renderColumn(props.val, col))}
+        {props.modal ? (
+          <Modal
+            {...props.modal(props.val)}
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+          ></Modal>
+        ) : undefined}
+      </tr>
+      {openRow}
+    </>
   );
 }

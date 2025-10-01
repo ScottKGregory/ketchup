@@ -1,7 +1,5 @@
-import { animated, config, useTransition } from "@react-spring/web";
 import { useToast } from "../hooks/toast";
 import { createPortal } from "react-dom";
-import { useMemo } from "react";
 import Typography from "./typography";
 import Icon from "./icon";
 
@@ -77,48 +75,20 @@ export default function Toast(props: Props) {
 }
 
 export const ToastContainer = ({ toasts }: { toasts: ToastData[] }) => {
-  const refMap = useMemo(() => new WeakMap(), []);
-  const cancelMap = useMemo(() => new WeakMap(), []);
   const { removeToast } = useToast();
-
-  const transitions = useTransition(toasts, {
-    config: config.stiff,
-    from: { x: -400, height: 0 },
-    trail: 400 / toasts.length,
-    enter: (item) => async (next, cancel) => {
-      cancelMap.set(item, cancel);
-      await next({
-        x: 0,
-        height: refMap.get(item).offsetHeight,
-      });
-    },
-    leave: (item) => async (next, cancel) => {
-      cancelMap.set(item, cancel);
-      await next({
-        x: -400,
-        height: refMap.get(item).offsetHeight,
-      });
-    },
-  });
 
   return createPortal(
     <div className="fixed bottom-0 left-0 z-10 flex w-96 flex-col gap-2 p-4">
-      {transitions((style, t) => (
-        <animated.div style={style}>
-          <div
-            ref={(ref: HTMLDivElement) => {
-              refMap.set(t, ref);
-            }}
-          >
-            <Toast
-              key={t.id}
-              message={t.content}
-              level={t.level}
-              onClose={() => removeToast(t.id)}
-            />
-          </div>
-        </animated.div>
-      ))}
+      {toasts.map((t) => {
+        return (
+          <Toast
+            key={t.id}
+            message={t.content}
+            level={t.level}
+            onClose={() => removeToast(t.id)}
+          />
+        );
+      })}
     </div>,
     document.body,
   );

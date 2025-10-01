@@ -15,12 +15,14 @@ import Timeline from "./components/timeline";
 import type { IconName } from "./components/icon";
 import type { Colour } from "./helpers/classes";
 import Toggle from "./components/forms/toggle";
+import Field from "./components/field";
 
 interface Produce {
   id: number;
   name: string;
   cost: string;
   origin: string;
+  description?: string;
 }
 
 export default function App() {
@@ -239,6 +241,16 @@ function Content() {
                     val.name,
                   );
                 }}
+                expand={(val) => (
+                  <>
+                    <Typography type="h3">{val.name}</Typography>
+                    <Field label="ID" text={val.id} />
+                    <Field label="Name" text={val.name} />
+                    <Field label="Cost" text={val.cost} />
+                    <Field label="Origin" text={val.origin} />
+                    <Field label="Description" text={val.description} />
+                  </>
+                )}
               />
             </Paginator>
           </Card>

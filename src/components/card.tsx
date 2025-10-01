@@ -6,7 +6,7 @@ import Button from "./button";
 interface Props extends PropsWithChildren {
   className?: string;
   padding?: Size;
-  level?: "root" | "secondary";
+  level?: "root" | "secondary" | "tertiary";
   noBackground?: boolean;
   onClick?: () => void;
   header?: React.ReactNode;
@@ -24,10 +24,10 @@ export default function Card(props: Props) {
         {
           "bg-white shadow-lg dark:bg-gray-900":
             level === "root" && !props.noBackground,
-        },
-        {
           "bg-gray-200 shadow-lg dark:bg-gray-800":
             level === "secondary" && !props.noBackground,
+          "bg-gray-100 shadow-lg dark:bg-gray-700":
+            level === "tertiary" && !props.noBackground,
         },
         { "hover:cursor-pointer": props.onClick },
         props.className,
@@ -45,7 +45,7 @@ export default function Card(props: Props) {
           <div className="flex-1">{props.header}</div>
           {props.collapsible && (
             <Button
-              className="mr-0 mt-0 pr-0 pt-0"
+              className="mt-0 mr-0 pt-0 pr-0"
               noBackground
               icon={{
                 icon: open ? "caret-down" : "caret-up",
