@@ -12,6 +12,7 @@ interface Props {
   links: Link[];
   heading: string;
   logoSrc: string;
+  signoutLink?: string;
 }
 
 export default function Navbar(props: Props) {
@@ -29,11 +30,11 @@ export default function Navbar(props: Props) {
           </Typography>
         </a>
         <div className="flex space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
-          <a href="">
+          {props.signoutLink && <a href={props.signoutLink}>
             <Typography>
               <Icon icon="right-to-bracket" />
             </Typography>
-          </a>
+          </a>}
         </div>
         <div className="order-1 flex w-full items-center justify-between md:w-auto">
           <ul className="mt-0 flex flex-row space-x-8 rounded-lg border-0 p-0 font-medium rtl:space-x-reverse">

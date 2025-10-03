@@ -1,5 +1,5 @@
 import { type PropsWithChildren, useMemo } from "react";
-import formatDate from "../helpers/dates";
+import { formatDate } from "../helpers/dates";
 import Typography from "./typography";
 
 interface Props {

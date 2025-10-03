@@ -8,6 +8,7 @@ export type Size =
   | "md"
   | "sm"
   | "xs"
+  | "none"
   | undefined;
 export type Colour =
   | "red"
@@ -65,6 +66,8 @@ export const Padding = (size: Size, prefix: string = "p"): string => {
       return `${prefix}-2`;
     case "xs":
       return `${prefix}-1`;
+    case "none":
+      return ``;
     default:
       return `${prefix}-4`;
   }
@@ -88,6 +91,8 @@ export const TextSize = (size: Size): string => {
       return "text-sm";
     case "xs":
       return "text-xs";
+    case "none":
+      return ``;
     default:
       return "";
   }

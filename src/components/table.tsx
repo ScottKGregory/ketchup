@@ -1,10 +1,10 @@
 import classNames from "classnames";
-import { useState, type ReactElement, type ReactNode } from "react";
+import { useEffect, useState, type ReactElement, type ReactNode } from "react";
 import { TextAlignment, type Alignment } from "../helpers/classes";
 import Typography from "./typography";
 import Card from "./card";
 import Modal, { type Props as ModalProps } from "./modal";
-import formatDate from "../helpers/dates";
+import { formatDate } from "../helpers/dates";
 
 interface WithID {
   id?: string | number;
@@ -22,6 +22,8 @@ export interface Props<T extends WithID> {
   caption?: ReactElement;
   footer?: ReactElement;
   leftHeading?: boolean;
+  cellClasses?: string;
+  rowClassNames?: (val: T) => string;
 
   data: T[];
   columns: (Column<T> | null)[];
@@ -90,7 +92,11 @@ export default function Table<T extends WithID>(props: Props<T>) {
                 <th
                   key={String(col.key)}
                   scope="col"
-                  className={classNames(TextAlignment(col.align), cellClasses)}
+                  className={classNames(
+                    TextAlignment(col.align),
+                    cellClasses,
+                    props.cellClasses,
+                  )}
                 >
                   <Typography type="span">{col.heading}</Typography>
                 </th>
@@ -99,7 +105,13 @@ export default function Table<T extends WithID>(props: Props<T>) {
         </thead>
         <tbody>
           {props.data.map((val) => (
-            <Row key={`row-${val.id}`} {...props} val={val} />
+            <Row
+              key={`row-${val.id}`}
+              {...props}
+              val={val}
+              className={props.rowClassNames && props.rowClassNames(val)}
+              cellClasses={props.cellClasses}
+            />
           ))}
         </tbody>
         {props.footer && <tfoot>{props.footer}</tfoot>}
@@ -107,7 +119,14 @@ export default function Table<T extends WithID>(props: Props<T>) {
 
       <div className="flex flex-col gap-2 md:hidden">
         {props.data.map((val) => (
-          <Row key={`card-${val.id}`} {...props} val={val} card />
+          <Row
+            key={`card-${val.id}`}
+            {...props}
+            val={val}
+            card
+            className={props.rowClassNames && props.rowClassNames(val)}
+            cellClasses={props.cellClasses}
+          />
         ))}
 
         {props.footer && <tfoot>{props.footer}</tfoot>}
@@ -124,14 +143,25 @@ interface RowProps<T extends WithID> {
   modal?: (val: T) => ModalProps;
   expand?: (val: T) => ReactNode;
   card?: boolean;
+  className?: string;
+  cellClasses?: string;
 }
 
 function Row<T extends WithID>(props: RowProps<T>) {
   const [modalOpen, setModalOpen] = useState(false);
   const [rowOpen, setRowOpen] = useState(false);
 
+  useEffect(() => {
+    console.log("modalOpen", modalOpen);
+  }, [modalOpen]);
+
   const renderColumn = (val: T, col: Column<T>) => {
-    const classes = classNames(TextAlignment(col.align), cellClasses);
+    const classes = classNames(
+      TextAlignment(col.align),
+      cellClasses,
+      props.className,
+      props.cellClasses,
+    );
     const ret = getData(val, col);
     return props.leftHeading ? (
       <th scope="row" className={classes}>
@@ -148,6 +178,7 @@ function Row<T extends WithID>(props: RowProps<T>) {
     <tr>
       <td colSpan={props.columns.length}>
         <Card
+          padding="none"
           className={classNames({
             "mb-2 rounded-none border-t": !props.card,
             "mt-2": props.card,
@@ -160,23 +191,26 @@ function Row<T extends WithID>(props: RowProps<T>) {
     </tr>
   );
 
-  const onClick = () => {
-    if (props.expand) {
-      setRowOpen((o) => !o);
-    }
+  const oc = !modalOpen
+    ? () => {
+        console.log("fuck you?");
+        if (props.expand) {
+          setRowOpen((o) => !o);
+        }
 
-    if (props.modal) {
-      setModalOpen(true);
-    }
+        if (props.modal) {
+          setModalOpen(true);
+        }
 
-    if (props.onRowClick) {
-      props.onRowClick!(props.val);
-    }
-  };
+        if (props.onRowClick) {
+          props.onRowClick!(props.val);
+        }
+      }
+    : undefined;
 
   if (props.card) {
     return (
-      <Card level="secondary" onClick={onClick}>
+      <Card level="secondary" onClick={oc}>
         <div className="flex flex-col">
           {props.columns
             .filter((c) => c !== null)
@@ -201,10 +235,11 @@ function Row<T extends WithID>(props: RowProps<T>) {
       <tr
         key={props.val.id}
         className={classNames("hover:bg-gray-100 dark:hover:bg-gray-800", {
-          "hover:cursor-pointer": !!props.onRowClick || !!props.modal,
+          "hover:cursor-pointer":
+            !!props.onRowClick || !!props.modal || !!props.expand,
           "bg-gray-100 shadow-lg dark:bg-gray-700": rowOpen,
         })}
-        onClick={onClick}
+        onClick={oc}
       >
         {props.columns
           .filter((c) => c !== null)
@@ -213,7 +248,9 @@ function Row<T extends WithID>(props: RowProps<T>) {
           <Modal
             {...props.modal(props.val)}
             open={modalOpen}
-            onClose={() => setModalOpen(false)}
+            onClose={() => {
+              setModalOpen(false);
+            }}
           ></Modal>
         ) : undefined}
       </tr>

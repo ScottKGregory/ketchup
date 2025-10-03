@@ -18,6 +18,7 @@ export type InputType =
   | "search"
   | "tel"
   | "text"
+  | "textarea"
   | "time"
   | "url"
   | "week"
@@ -32,6 +33,9 @@ interface Props {
   label?: string;
   placeholder?: string;
   help?: string;
+
+  value?: string;
+  onChange?: (str: string) => void;
 }
 // https://react-hook-form.com/get-started ??????
 export default function Input(props: Props) {
@@ -46,12 +50,28 @@ export default function Input(props: Props) {
       <Typography type="label" className={labelClasses}>
         {props.label}
       </Typography>
-      <input
-        type={props.type}
-        id={props.id}
-        className={classNames(inputClasses)}
-        placeholder={props.placeholder}
-      />
+      {props.type === "textarea" ? (
+        <textarea
+          id={props.id}
+          className={classNames(inputClasses)}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={(e) =>
+            props.onChange ? props.onChange(e.target.value) : undefined
+          }
+        />
+      ) : (
+        <input
+          type={props.type}
+          id={props.id}
+          className={classNames(inputClasses)}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={(e) =>
+            props.onChange ? props.onChange(e.target.value) : undefined
+          }
+        />
+      )}
       <Typography size="sm" className={classNames("mt-2", helpClasses)}>
         {props.help}
       </Typography>
