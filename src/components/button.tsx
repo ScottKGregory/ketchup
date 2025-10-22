@@ -13,6 +13,7 @@ interface Props {
   icon?: IconProps;
   noBackground?: boolean;
   noPadding?: boolean;
+  noMargin?: boolean;
 
   link?: string;
   download?: boolean;
@@ -22,7 +23,8 @@ export default function Button(props: PropsWithChildren<Props>) {
   const classes = classNames(
     "hover:cursor-pointer",
     "shadow-md transition-all",
-    "mb-2 me-2 inline-flex rounded-lg bg-primary-700 text-sm font-medium text-white gap-2",
+    " inline-flex rounded-lg bg-primary-700 text-sm font-medium text-white gap-2",
+    { "mb-2 me-2": !props.noMargin },
     "hover:bg-primary-800",
     {
       "focus:outline-hidden focus:ring-4 focus:ring-primary-300":
@@ -59,7 +61,12 @@ export default function Button(props: PropsWithChildren<Props>) {
   if (props.icon && !props.text) {
     return (
       <button
-        onClick={props.onClick}
+        onClick={(e) => {
+          e.preventDefault();
+          if (props.onClick) {
+            props.onClick();
+          }
+        }}
         className={classNames(
           classes,
           "aspect-square h-fit w-fit",
@@ -76,7 +83,12 @@ export default function Button(props: PropsWithChildren<Props>) {
     <button
       type="button"
       className={classNames(classes, props.className)}
-      onClick={props.onClick}
+      onClick={(e) => {
+        e.preventDefault();
+        if (props.onClick) {
+          props.onClick();
+        }
+      }}
       disabled={props.disabled}
     >
       {props.loading && <Spinner loading inline />}

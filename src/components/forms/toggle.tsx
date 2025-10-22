@@ -34,8 +34,8 @@ export default function Toggle(props: Props) {
               }
             }}
             className={classNames(
-              "h-4 w-4 rounded-xs border-gray-300 bg-gray-100 text-primary-600 outline-hidden focus:ring-primary-500 dark:focus:ring-primary-600",
-              "accent-primary-600 focus:outline-hidden focus:ring-2 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800",
+              "text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded-xs border-gray-300 bg-gray-100 outline-hidden",
+              "accent-primary-600 focus:ring-2 focus:outline-hidden dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800",
             )}
           />
           <Typography type="label" className={classNames(labelClasses, "ms-2")}>
@@ -73,7 +73,7 @@ export default function Toggle(props: Props) {
             "peer relative h-6 w-11 rounded-full bg-gray-200",
             "after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full",
             "after:border after:border-gray-300 after:bg-white after:transition-all after:content-['']",
-            "peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-hidden",
+            "peer-focus:outline-hidden peer-checked:after:translate-x-full peer-checked:after:border-white",
             "peer-focus:ring-4 peer-checked:rtl:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700",
           )}
         ></div>

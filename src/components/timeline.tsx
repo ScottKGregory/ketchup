@@ -36,7 +36,7 @@ export default function Timeline(props: Props) {
       {props.events
         .filter((e) => !!e)
         .map((e) => (
-          <li className="mb-10 ms-8">
+          <li className="ms-8 mb-10">
             <span
               className={classNames(
                 "absolute -start-4 flex h-8 w-8 items-center justify-center rounded-sm",
@@ -50,7 +50,7 @@ export default function Timeline(props: Props) {
               {e.tags?.map((t) => (
                 <span
                   className={classNames(
-                    "me-1 ms-1 rounded-sm px-2.5 py-0.5 text-sm font-medium first-of-type:ms-3",
+                    "ms-1 me-1 rounded-sm px-2.5 py-0.5 text-sm font-medium first-of-type:ms-3",
                     tagClasses(t.colour),
                   )}
                 >

@@ -9,7 +9,7 @@ export default function Container(props: Props) {
   return (
     <section
       className={classNames(
-        "mx-auto mt-16 max-w-(--breakpoint-xl) first-of-type:mt-32 last-of-type:mb-32",
+        "mx-auto mt-16 max-w-(--breakpoint-2xl) first-of-type:mt-32 last-of-type:mb-32",
         props.className,
       )}
     >

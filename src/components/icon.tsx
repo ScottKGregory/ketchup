@@ -40,11 +40,11 @@ export interface Props {
 export type IconName = FaIconName;
 
 export default function Icon(props: Props) {
-  const prefix = props.iconPrefix ?? "fad";
+  const prefix = props.iconPrefix ?? "fas";
   const stackPrefix = props.stackPrefix ?? "fas";
   const icon = props.icon || "question-circle";
 
-  const cn = classNames(GetColour("text", props.iconColour, 500));
+  const cn = classNames(GetColour("text", props.iconColour, 600));
 
   if (props.iconStack) {
     return (

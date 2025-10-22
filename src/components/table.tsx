@@ -1,12 +1,12 @@
 import classNames from "classnames";
-import { useEffect, useState, type ReactElement, type ReactNode } from "react";
+import { useState, type ReactElement, type ReactNode } from "react";
 import { TextAlignment, type Alignment } from "../helpers/classes";
 import Typography from "./typography";
 import Card from "./card";
 import Modal, { type Props as ModalProps } from "./modal";
 import { formatDate } from "../helpers/dates";
 
-interface WithID {
+export interface WithID {
   id?: string | number;
 }
 
@@ -151,10 +151,6 @@ function Row<T extends WithID>(props: RowProps<T>) {
   const [modalOpen, setModalOpen] = useState(false);
   const [rowOpen, setRowOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("modalOpen", modalOpen);
-  }, [modalOpen]);
-
   const renderColumn = (val: T, col: Column<T>) => {
     const classes = classNames(
       TextAlignment(col.align),
@@ -182,8 +178,8 @@ function Row<T extends WithID>(props: RowProps<T>) {
           className={classNames({
             "mb-2 rounded-none border-t": !props.card,
             "mt-2": props.card,
+            "dark:bg-gray-800": true,
           })}
-          level="tertiary"
         >
           {props.expand(props.val)}
         </Card>
@@ -193,7 +189,6 @@ function Row<T extends WithID>(props: RowProps<T>) {
 
   const oc = !modalOpen
     ? () => {
-        console.log("fuck you?");
         if (props.expand) {
           setRowOpen((o) => !o);
         }

@@ -32,7 +32,7 @@ export default function Spinner(props: Props) {
         })}
       >
         <Typography type="span" size={props.inline ? undefined : "4xl"}>
-          <Icon icon="spinner-third" iconSpin iconPrefix="fas" />
+          <Icon icon="spinner" iconSpin iconPrefix="fas" />
         </Typography>
       </div>
     </div>

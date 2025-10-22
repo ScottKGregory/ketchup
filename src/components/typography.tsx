@@ -41,12 +41,11 @@ interface Props extends PropsWithChildren {
 export default function Typography(props: Props) {
   const textColour = props.noColour ? "" : "text-gray-700 dark:text-gray-300";
   let classes = classNames(
-    "font-sans",
     "last:mb-0",
     {
       "font-semibold": props.bold,
       underline: props.underlined,
-      "font-italic": props.italic,
+      italic: props.italic,
       "line-through": props.strike,
       uppercase: props.uppercase,
     },
@@ -92,7 +91,7 @@ export default function Typography(props: Props) {
         <h1
           className={classNames(
             classes,
-            "mb-4 font-heading text-5xl font-extrabold",
+            "font-heading mb-4 text-5xl font-extrabold",
             props.className,
           )}
         >
@@ -205,7 +204,7 @@ export default function Typography(props: Props) {
           <p
             className={classNames(
               classes,
-              "text-xl font-medium italic leading-relaxed text-gray-900",
+              "text-xl leading-relaxed font-medium text-gray-900 italic",
               props.className,
             )}
           >
